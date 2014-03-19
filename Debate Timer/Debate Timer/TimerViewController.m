@@ -8,6 +8,7 @@
 
 #import "TimerViewController.h"
 #import "ViewController.h"
+#import <AudioToolbox/AudioToolbox.h>
 
 @interface TimerViewController ()
 
@@ -23,6 +24,7 @@ int styleChosen;
 BOOL alertShown = NO;
 BOOL timerStarted = NO;
 BOOL timerPaused = NO;
+
 
 - (void)viewDidLoad
 {
@@ -41,7 +43,7 @@ BOOL timerPaused = NO;
     timerPaused = NO;
     
     //Policy Arrays
-    policyTimes = [NSArray arrayWithObjects: @8, @3, @8, @3, @8, @3, @8, @3, @5, @5, @5, @5, @0, nil];
+    policyTimes = [NSArray arrayWithObjects: @1, @3, @8, @3, @8, @3, @8, @3, @5, @5, @5, @5, @0, nil];
     policySpeeches = [NSArray arrayWithObjects:@"1AC", @"1st CX", @"1NC", @"2nd CX", @"2AC", @"3rd CX", @"2NC", @"4th CX", @"1NR", @"1AR", @"2NR", @"2AR", @"Round Finished", nil];
     
     //Lincoln-Douglas Arrays
@@ -167,7 +169,6 @@ BOOL timerPaused = NO;
         minutes = (countdownTimeCentiseconds / 100) / 60;
         
         self.timerLabel.text = [NSString stringWithFormat:@"%02d:%02d:%02d", minutes, seconds, centiseconds];
-        //NSLog(@"%02d:%02d:%02d", minutes, seconds, milliseconds);
         NSLog(@"Total countdown time: %i", countdownTimeCentiseconds);
     }
     else
@@ -175,6 +176,7 @@ BOOL timerPaused = NO;
         //Shows alert that the speech is finished
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Timer done" message:@"Speech is finished" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
+        
         
         //Set labels for next speech
         if (styleChosen == 1)
