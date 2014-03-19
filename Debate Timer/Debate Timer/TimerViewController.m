@@ -16,7 +16,7 @@
 @implementation TimerViewController
 @synthesize policyTimes, policySpeeches, ldTimes, ldSpeeches, pfTimes, pfSpeeches, timerLabel, speechLabel, storeData, startTimerButton;
 
-int minutes, seconds, countdownTimeSeconds;
+int minutes, seconds, centiseconds, countdownTimeCentiseconds;
 int placeHolderMin;
 int speechCounter;
 int styleChosen;
@@ -77,7 +77,7 @@ BOOL timerPaused = NO;
         NSLog(@"PFD timing selected");
     }
     
-    self.timerLabel.text = [NSString stringWithFormat:@"%02d:00", placeHolderMin];
+    self.timerLabel.text = [NSString stringWithFormat:@"%02d:00:00", placeHolderMin];
 }
 
 - (void)setDataForPolicy
@@ -101,26 +101,23 @@ BOOL timerPaused = NO;
 //Start button tap
 - (IBAction)startTimerButtonTap:(id)sender
 {
-    ViewController *vC = [[ViewController alloc] init];
-    vC.whatStyle = [storeData integerForKey:@"styleKey"];
-    
     if (!timerStarted)
     {
         //Starts timer
         if (styleChosen == 1)
         {
-            countdownTimeSeconds = [[policyTimes objectAtIndex:speechCounter] intValue] * 60;
+            countdownTimeCentiseconds = [[policyTimes objectAtIndex:speechCounter] intValue] * 6000;
         }
         else if (styleChosen == 2)
         {
-            countdownTimeSeconds = [[ldTimes objectAtIndex:speechCounter] intValue] * 60;
+            countdownTimeCentiseconds = [[ldTimes objectAtIndex:speechCounter] intValue] * 6000;
         }
         else if (styleChosen == 3)
         {
-            countdownTimeSeconds = [[pfTimes objectAtIndex:speechCounter] intValue] * 60;
+            countdownTimeCentiseconds = [[pfTimes objectAtIndex:speechCounter] intValue] * 6000;
         }
         
-        if (countdownTimeSeconds > 0)
+        if (countdownTimeCentiseconds > 0)
         {
             [self timerRuns];
             
@@ -154,7 +151,7 @@ BOOL timerPaused = NO;
 //Runs the timer
 - (void)timerRuns
 {
-    speechTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(updateLabel:) userInfo:nil repeats:YES];
+    speechTimer = [NSTimer scheduledTimerWithTimeInterval:0.01f target:self selector:@selector(updateLabel:) userInfo:nil repeats:YES];
     speechCounter ++;
     NSLog(@"Timer has started");
 }
@@ -162,16 +159,18 @@ BOOL timerPaused = NO;
 //Effectively the timer
 - (void)updateLabel:(NSTimer *)timer
 {
-    if (countdownTimeSeconds > 0)
+    if (countdownTimeCentiseconds > 0)
     {
-        countdownTimeSeconds --;
-        seconds = (countdownTimeSeconds % 3600) % 60;
-        minutes = (countdownTimeSeconds % 3600) / 60;
+        countdownTimeCentiseconds --;
+        centiseconds = countdownTimeCentiseconds % 100;
+        seconds = (countdownTimeCentiseconds / 100) % 60;
+        minutes = (countdownTimeCentiseconds / 100) / 60;
         
-        self.timerLabel.text = [NSString stringWithFormat:@"%02d:%02d", minutes, seconds];
-        NSLog(@"%02d:%02d", minutes, seconds);
+        self.timerLabel.text = [NSString stringWithFormat:@"%02d:%02d:%02d", minutes, seconds, centiseconds];
+        //NSLog(@"%02d:%02d:%02d", minutes, seconds, milliseconds);
+        NSLog(@"Total countdown time: %i", countdownTimeCentiseconds);
     }
-    else if (countdownTimeSeconds == 0)
+    else
     {
         //Shows alert that the speech is finished
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Timer done" message:@"Speech is finished" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
