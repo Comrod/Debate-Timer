@@ -19,6 +19,7 @@
 int minutes, seconds, countdownTimeSeconds;
 int placeHolderMin;
 int speechCounter;
+int styleChosen;
 BOOL alertShown = NO;
 BOOL timerStarted = NO;
 BOOL timerPaused = NO;
@@ -40,8 +41,10 @@ BOOL timerPaused = NO;
     timerPaused = NO;
     
     //Policy Arrays
-    policyTimes = [NSArray arrayWithObjects: @8, @3, @8, @3, @8, @3, @8, @3, @5, @5, @5, @5, nil];
-    policySpeeches = [NSArray arrayWithObjects:@"1AC", @"1st CX", @"1NC", @"2nd CX", @"2AC", @"3rd CX", @"2NC", @"4th CX", @"1NR", @"1AR", @"2NR", @"2AR", nil];
+    policyTimes = [NSArray arrayWithObjects: @1, @0, nil];
+    policySpeeches = [NSArray arrayWithObjects:@"1AC", @"Round Finished", nil];
+    //policyTimes = [NSArray arrayWithObjects: @8, @3, @8, @3, @8, @3, @8, @3, @5, @5, @5, @5, nil];
+    //policySpeeches = [NSArray arrayWithObjects:@"1AC", @"1st CX", @"1NC", @"2nd CX", @"2AC", @"3rd CX", @"2NC", @"4th CX", @"1NR", @"1AR", @"2NR", @"2AR", nil];
     
     //Lincoln-Douglas Arrays
     ldTimes = [NSArray arrayWithObjects:@6, @3, @7, @3, @4, @6, @3, nil];
@@ -51,11 +54,10 @@ BOOL timerPaused = NO;
     pfTimes = [NSArray arrayWithObjects:@4, @4, @3, @4, @4, @3, @2, @2, @3, @2, @2, nil];
     pfSpeeches = [NSArray arrayWithObjects:@"Team A Constructive", @"Team B Constructive", @"Crossfire", @"Team A Rebuttal", @"Team B Rebuttal", @"Crossfire", @"Team A Summary", @"Team B Summary", @"Grand Crossfire", @"Team A Final", @"Team B Final", nil];
 
-    ViewController *vC = [[ViewController alloc] init];
-    vC.whatStyle = [storeData integerForKey:@"styleKey"];
-    NSLog(@"Style of debate: %i", vC.whatStyle);
+    styleChosen = [storeData integerForKey:@"styleKey"];
+    NSLog(@"Style of debate: %i", styleChosen);
     
-    if (vC.whatStyle == 1)
+    if (styleChosen == 1)
     {
         //Policy
         
@@ -67,7 +69,7 @@ BOOL timerPaused = NO;
         
         NSLog(@"Policy timing selected");
     }
-    else if (vC.whatStyle == 2)
+    else if (styleChosen == 2)
     {
         //Lincoln-Douglas
         
@@ -79,7 +81,7 @@ BOOL timerPaused = NO;
         
         NSLog(@"LD timing selected");
     }
-    else if (vC.whatStyle == 3)
+    else if (styleChosen == 3)
     {
         //Public Forum
         
@@ -104,15 +106,15 @@ BOOL timerPaused = NO;
     if (!timerStarted)
     {
         //Starts timer
-        if (vC.whatStyle == 1)
+        if (styleChosen == 1)
         {
             countdownTimeSeconds = [[policyTimes objectAtIndex:speechCounter] intValue] * 60;
         }
-        else if (vC.whatStyle == 2)
+        else if (styleChosen == 2)
         {
             countdownTimeSeconds = [[ldTimes objectAtIndex:speechCounter] intValue] * 60;
         }
-        else if (vC.whatStyle == 3)
+        else if (styleChosen == 3)
         {
             countdownTimeSeconds = [[pfTimes objectAtIndex:speechCounter] intValue] * 60;
         }
@@ -138,17 +140,6 @@ BOOL timerPaused = NO;
             timerPaused = NO;
         }
     }
-}
-
-//Back button tap
-- (IBAction)backButtonTap:(id)sender
-{
-    //Stops tiemr
-    [speechTimer invalidate];
-    
-    //Changes view controller back to main view
-    ViewController *vC = [self.storyboard instantiateViewControllerWithIdentifier:@"viewController"];
-    [self presentViewController:vC animated:YES completion:nil];
 }
 
 //Runs the timer
@@ -178,31 +169,42 @@ BOOL timerPaused = NO;
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Timer done" message:@"Speech is finished" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
         
+        NSLog(@"vC.whatStyle: %i", vC.whatStyle);
+        vC.whatStyle = [storeData integerForKey:@"styleKey"];
+        
         //Set labels for next speech
-        if (vC.whatStyle == 1)
+        if (styleChosen == 1)
         {
             speechLabel.text = [policySpeeches objectAtIndex:speechCounter];
             placeHolderMin = [[policyTimes objectAtIndex:speechCounter] intValue];
+            NSLog(@"Next speech: %@", speechLabel.text);
         }
-        else if (vC.whatStyle == 2)
+        else if (styleChosen == 2)
         {
             speechLabel.text = [ldSpeeches objectAtIndex:speechCounter];
             placeHolderMin = [[ldTimes objectAtIndex:speechCounter] intValue];
+            NSLog(@"Next speech: %@", speechLabel.text);
         }
-        else if (vC.whatStyle == 3)
+        else if (styleChosen == 3)
         {
             speechLabel.text = [pfSpeeches objectAtIndex:speechCounter];
             placeHolderMin = [[pfTimes objectAtIndex:speechCounter] intValue];
+            NSLog(@"Next speech: %@", speechLabel.text);
         }
         
         //Set placeholder time
         self.timerLabel.text = [NSString stringWithFormat:@"%02d:00", placeHolderMin];
+        
+        //Reset pausing mechanism and button label
+        timerStarted = NO;
+        [startTimerButton setTitle:@"Start Timer" forState:UIControlStateNormal];
         
         //Stops timer
         [speechTimer invalidate];
     }
 }
 
+//Pauses timer
 - (void)pauseTimer
 {
     [speechTimer setFireDate:[NSDate dateWithTimeIntervalSinceNow:31536000]];
@@ -210,11 +212,23 @@ BOOL timerPaused = NO;
     [startTimerButton setTitle:@"Start Timer" forState:UIControlStateNormal];
 }
 
+//Resumes timer
 - (void)resumeTimer
 {
     [speechTimer setFireDate:[NSDate date]];
     
     [startTimerButton setTitle:@"Pause Timer" forState:UIControlStateNormal];
+}
+
+//Back button tap
+- (IBAction)backButtonTap:(id)sender
+{
+    //Stops timer
+    [speechTimer invalidate];
+    
+    //Changes view controller back to main view
+    ViewController *vC = [self.storyboard instantiateViewControllerWithIdentifier:@"viewController"];
+    [self presentViewController:vC animated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning
