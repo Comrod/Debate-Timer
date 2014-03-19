@@ -41,7 +41,7 @@ BOOL timerPaused = NO;
     timerPaused = NO;
     
     //Policy Arrays
-    policyTimes = [NSArray arrayWithObjects: @8, @3, @8, @3, @8, @3, @8, @3, @5, @5, @5, @5, @0, nil];
+    policyTimes = [NSArray arrayWithObjects: @1, @3, @8, @3, @8, @3, @8, @3, @5, @5, @5, @5, @0, nil];
     policySpeeches = [NSArray arrayWithObjects:@"1AC", @"1st CX", @"1NC", @"2nd CX", @"2AC", @"3rd CX", @"2NC", @"4th CX", @"1NR", @"1AR", @"2NR", @"2AR", @"Round Finished", nil];
     
     //Lincoln-Douglas Arrays
@@ -58,41 +58,44 @@ BOOL timerPaused = NO;
     if (styleChosen == 1)
     {
         //Policy
-        
-        //Speech label
-        speechLabel.text = [policySpeeches objectAtIndex:speechCounter];
-        
-        //Placeholder time
-        placeHolderMin = [[policyTimes objectAtIndex:speechCounter] intValue];
+        [self setDataForPolicy];
         
         NSLog(@"Policy timing selected");
     }
     else if (styleChosen == 2)
     {
         //Lincoln-Douglas
-        
-        //Speech label
-        speechLabel.text = [ldSpeeches objectAtIndex:speechCounter];
-        
-        //Placeholder time
-        placeHolderMin = [[ldTimes objectAtIndex:speechCounter] intValue];
+        [self setDataForLD];
         
         NSLog(@"LD timing selected");
     }
     else if (styleChosen == 3)
     {
         //Public Forum
-        
-        //Speech label
-        speechLabel.text = [pfSpeeches objectAtIndex:speechCounter];
-        
-        //Placeholder time
-        placeHolderMin = [[pfTimes objectAtIndex:speechCounter] intValue];
+        [self setDataForPFD];
         
         NSLog(@"PFD timing selected");
     }
     
     self.timerLabel.text = [NSString stringWithFormat:@"%02d:00", placeHolderMin];
+}
+
+- (void)setDataForPolicy
+{
+    speechLabel.text = [policySpeeches objectAtIndex:speechCounter];
+    placeHolderMin = [[policyTimes objectAtIndex:speechCounter] intValue];
+}
+
+- (void)setDataForLD
+{
+    speechLabel.text = [ldSpeeches objectAtIndex:speechCounter];
+    placeHolderMin = [[ldTimes objectAtIndex:speechCounter] intValue];
+}
+
+- (void)setDataForPFD
+{
+    speechLabel.text = [pfSpeeches objectAtIndex:speechCounter];
+    placeHolderMin = [[pfTimes objectAtIndex:speechCounter] intValue];
 }
 
 //Start button tap
@@ -127,12 +130,8 @@ BOOL timerPaused = NO;
         }
         else
         {
-            //Sends user back to selection screen after the round is over
-            UIAlertView *roundOverAlert = [[UIAlertView alloc] initWithTitle:@"Round is Over" message:@"Round is over, you've been sent back to the selection screen" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [roundOverAlert show];
-            
-            ViewController *vC = [self.storyboard instantiateViewControllerWithIdentifier:@"viewController"];
-            [self presentViewController:vC animated:YES completion:nil];
+            //Round is over
+            [self roundOver];
         }
     }
     else if (timerStarted)
@@ -163,8 +162,6 @@ BOOL timerPaused = NO;
 //Effectively the timer
 - (void)updateLabel:(NSTimer *)timer
 {
-    ViewController *vC = [[ViewController alloc] init];
-    
     if (countdownTimeSeconds > 0)
     {
         countdownTimeSeconds --;
@@ -179,26 +176,20 @@ BOOL timerPaused = NO;
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Timer done" message:@"Speech is finished" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
         
-        NSLog(@"vC.whatStyle: %i", vC.whatStyle);
-        vC.whatStyle = [storeData integerForKey:@"styleKey"];
-        
         //Set labels for next speech
         if (styleChosen == 1)
         {
-            speechLabel.text = [policySpeeches objectAtIndex:speechCounter];
-            placeHolderMin = [[policyTimes objectAtIndex:speechCounter] intValue];
+            [self setDataForPolicy];
             NSLog(@"Next speech: %@", speechLabel.text);
         }
         else if (styleChosen == 2)
         {
-            speechLabel.text = [ldSpeeches objectAtIndex:speechCounter];
-            placeHolderMin = [[ldTimes objectAtIndex:speechCounter] intValue];
+            [self setDataForLD];
             NSLog(@"Next speech: %@", speechLabel.text);
         }
         else if (styleChosen == 3)
         {
-            speechLabel.text = [pfSpeeches objectAtIndex:speechCounter];
-            placeHolderMin = [[pfTimes objectAtIndex:speechCounter] intValue];
+            [self setDataForPFD];
             NSLog(@"Next speech: %@", speechLabel.text);
         }
         
@@ -218,7 +209,6 @@ BOOL timerPaused = NO;
 - (void)pauseTimer
 {
     [speechTimer setFireDate:[NSDate dateWithTimeIntervalSinceNow:31536000]];
-    
     [startTimerButton setTitle:@"Start Timer" forState:UIControlStateNormal];
 }
 
@@ -226,13 +216,16 @@ BOOL timerPaused = NO;
 - (void)resumeTimer
 {
     [speechTimer setFireDate:[NSDate date]];
-    
     [startTimerButton setTitle:@"Pause Timer" forState:UIControlStateNormal];
 }
 
 - (void)roundOver
 {
+    UIAlertView *roundOverAlert = [[UIAlertView alloc] initWithTitle:@"Round is Over" message:@"Round is over, you've been sent back to the selection screen" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [roundOverAlert show];
     
+    ViewController *vC = [self.storyboard instantiateViewControllerWithIdentifier:@"viewController"];
+    [self presentViewController:vC animated:YES completion:nil];
 }
 
 //Back button tap
