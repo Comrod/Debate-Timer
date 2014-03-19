@@ -41,18 +41,16 @@ BOOL timerPaused = NO;
     timerPaused = NO;
     
     //Policy Arrays
-    policyTimes = [NSArray arrayWithObjects: @1, @0, nil];
-    policySpeeches = [NSArray arrayWithObjects:@"1AC", @"Round Finished", nil];
-    //policyTimes = [NSArray arrayWithObjects: @8, @3, @8, @3, @8, @3, @8, @3, @5, @5, @5, @5, nil];
-    //policySpeeches = [NSArray arrayWithObjects:@"1AC", @"1st CX", @"1NC", @"2nd CX", @"2AC", @"3rd CX", @"2NC", @"4th CX", @"1NR", @"1AR", @"2NR", @"2AR", nil];
+    policyTimes = [NSArray arrayWithObjects: @8, @3, @8, @3, @8, @3, @8, @3, @5, @5, @5, @5, @0, nil];
+    policySpeeches = [NSArray arrayWithObjects:@"1AC", @"1st CX", @"1NC", @"2nd CX", @"2AC", @"3rd CX", @"2NC", @"4th CX", @"1NR", @"1AR", @"2NR", @"2AR", @"Round Finished", nil];
     
     //Lincoln-Douglas Arrays
-    ldTimes = [NSArray arrayWithObjects:@6, @3, @7, @3, @4, @6, @3, nil];
-    ldSpeeches = [NSArray arrayWithObjects:@"AC", @"1st CX", @"NC (1NR)", @"2nd CX", @"1AR", @"NR (2NR)", @"2AR", nil];
+    ldTimes = [NSArray arrayWithObjects:@6, @3, @7, @3, @4, @6, @3, @0, nil];
+    ldSpeeches = [NSArray arrayWithObjects:@"AC", @"1st CX", @"NC (1NR)", @"2nd CX", @"1AR", @"NR (2NR)", @"2AR", @"Round Finished", nil];
     
     //Public Forum
-    pfTimes = [NSArray arrayWithObjects:@4, @4, @3, @4, @4, @3, @2, @2, @3, @2, @2, nil];
-    pfSpeeches = [NSArray arrayWithObjects:@"Team A Constructive", @"Team B Constructive", @"Crossfire", @"Team A Rebuttal", @"Team B Rebuttal", @"Crossfire", @"Team A Summary", @"Team B Summary", @"Grand Crossfire", @"Team A Final", @"Team B Final", nil];
+    pfTimes = [NSArray arrayWithObjects:@4, @4, @3, @4, @4, @3, @2, @2, @3, @2, @2, @0, nil];
+    pfSpeeches = [NSArray arrayWithObjects:@"Team A Constructive", @"Team B Constructive", @"Crossfire", @"Team A Rebuttal", @"Team B Rebuttal", @"Crossfire", @"Team A Summary", @"Team B Summary", @"Grand Crossfire", @"Team A Final", @"Team B Final", @"Round Finished", nil];
 
     styleChosen = [storeData integerForKey:@"styleKey"];
     NSLog(@"Style of debate: %i", styleChosen);
@@ -119,11 +117,23 @@ BOOL timerPaused = NO;
             countdownTimeSeconds = [[pfTimes objectAtIndex:speechCounter] intValue] * 60;
         }
         
-        [self timerRuns];
-        
-        [startTimerButton setTitle:@"Pause Timer" forState:UIControlStateNormal];
-        
-        timerStarted = YES;
+        if (countdownTimeSeconds > 0)
+        {
+            [self timerRuns];
+            
+            [startTimerButton setTitle:@"Pause Timer" forState:UIControlStateNormal];
+            
+            timerStarted = YES;
+        }
+        else
+        {
+            //Sends user back to selection screen after the round is over
+            UIAlertView *roundOverAlert = [[UIAlertView alloc] initWithTitle:@"Round is Over" message:@"Round is over, you've been sent back to the selection screen" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [roundOverAlert show];
+            
+            ViewController *vC = [self.storyboard instantiateViewControllerWithIdentifier:@"viewController"];
+            [self presentViewController:vC animated:YES completion:nil];
+        }
     }
     else if (timerStarted)
     {
@@ -218,6 +228,11 @@ BOOL timerPaused = NO;
     [speechTimer setFireDate:[NSDate date]];
     
     [startTimerButton setTitle:@"Pause Timer" forState:UIControlStateNormal];
+}
+
+- (void)roundOver
+{
+    
 }
 
 //Back button tap
