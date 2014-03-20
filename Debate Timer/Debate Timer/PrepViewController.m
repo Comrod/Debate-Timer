@@ -240,7 +240,7 @@ int theirMinutes;
         [self pauseTheirTimer];
         
     }
-    else if (isYourPrepPaused)
+    else if (isTheirPrepPaused)
     {
         [self resumeTheirTimer];
     }
