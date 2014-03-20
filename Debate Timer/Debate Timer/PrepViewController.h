@@ -25,5 +25,8 @@
 
 - (IBAction)yourPrepButtonTap:(id)sender;
 - (IBAction)theirPrepButtonTap:(id)sender;
+- (IBAction)resetYourPrepTap:(id)sender;
+- (IBAction)resetTheirPrepTap:(id)sender;
+
 
 @end

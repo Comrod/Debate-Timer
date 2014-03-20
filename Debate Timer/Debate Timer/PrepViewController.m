@@ -53,18 +53,9 @@ int theirMinutes;
     
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"goneHome"])
     {
-        //Your prep time
-        yourCountUpCentiseconds = 0;
-        [storeData setInteger:yourCountUpCentiseconds forKey:@"yourCentiseconds"];
-        isYourPrepStarted = NO;
-        isYourPrepPaused = NO;
-        
-        //Their prep time
-        theirCountUpCentiseconds = 0;
-        [storeData setInteger:theirCountUpCentiseconds forKey:@"theirCentiseconds"];
-        isTheirPrepStarted = NO;
-        isTheirPrepPaused = NO;
-        NSLog(@"Resetting prep time");
+        //Resets prep time if you have gone to the home screen
+        [self resetYourPrep];
+        [self resetTheirPrep];
     }
     else
     {
@@ -119,6 +110,7 @@ int theirMinutes;
     }
 }
 
+ #pragma mark - Your Prep Time
 - (void)runYourTimer
 {
     self.yourPrepTimer = [NSTimer scheduledTimerWithTimeInterval:0.01f target:self selector:@selector(updateYourLabel:) userInfo:nil repeats:YES];
@@ -130,6 +122,14 @@ int theirMinutes;
     yourSeconds = (yourCountUpCentiseconds / 100) % 60;
     yourMinutes = (yourCountUpCentiseconds / 100) / 60;
     
+    //Sets your label
+    [self setYourLabel];
+
+    [storeData setInteger:yourCountUpCentiseconds forKey:@"yourCentiseconds"];
+    //NSLog(@"Your total prep time in centiseconds: %i", yourCountUpCentiseconds);
+}
+- (void)setYourLabel
+{
     //Determines if centiseconds are shown
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isCenti"])
     {
@@ -139,9 +139,6 @@ int theirMinutes;
     {
         self.yourPrepLabel.text = [NSString stringWithFormat:@"%02d:%02d", yourMinutes, yourSeconds];
     }
-
-    [storeData setInteger:yourCountUpCentiseconds forKey:@"yourCentiseconds"];
-    NSLog(@"Your total prep time in centiseconds: %i", yourCountUpCentiseconds);
 }
 - (IBAction)yourPrepButtonTap:(id)sender
 {
@@ -175,11 +172,31 @@ int theirMinutes;
     [self runYourTimer];
     [yourPrepButton setTitle:@"Pause" forState:UIControlStateNormal];
     isYourPrepPaused = NO;
-    NSLog(@"Resumes their timer");
+    NSLog(@"Resumes your timer");
+}
+- (void)resetYourPrep
+{
+    yourCountUpCentiseconds = 0;
+    [storeData setInteger:yourCountUpCentiseconds forKey:@"yourCentiseconds"];
+    isYourPrepStarted = NO;
+    isYourPrepPaused = NO;
+    yourMinutes = 0;
+    yourSeconds = 0;
+    yourCentiseconds = 0;
+    [self setYourLabel];
+    [yourPrepButton setTitle:@"Start" forState:UIControlStateNormal];
+    NSLog(@"Resetting your prep time");
+}
+- (IBAction)resetYourPrepTap:(id)sender
+{
+    [self.yourPrepTimer invalidate];
+    [self resetYourPrep];
 }
 
 
 
+
+ #pragma mark - Their Prep Time
 //Runs their timer
 - (void)runTheirTimer
 {
@@ -191,7 +208,15 @@ int theirMinutes;
     theirCentiseconds = theirCountUpCentiseconds % 100;
     theirSeconds = (theirCountUpCentiseconds / 100) % 60;
     theirMinutes = (theirCountUpCentiseconds / 100) / 60;
+
+    //Sets their label
+    [self setTheirLabel];
     
+    [storeData setInteger:theirCountUpCentiseconds forKey:@"theirCentiseconds"];
+    //NSLog(@"Their total prep time in centiseconds: %i", theirCountUpCentiseconds);
+}
+- (void)setTheirLabel
+{
     //Determines if centiseconds are shown
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isCenti"])
     {
@@ -201,9 +226,6 @@ int theirMinutes;
     {
         self.theirPrepLabel.text = [NSString stringWithFormat:@"%02d:%02d", theirMinutes, theirSeconds];
     }
-    
-    [storeData setInteger:theirCountUpCentiseconds forKey:@"theirCentiseconds"];
-    NSLog(@"Their total prep time in centiseconds: %i", theirCountUpCentiseconds);
 }
 - (IBAction)theirPrepButtonTap:(id)sender
 {
@@ -238,6 +260,24 @@ int theirMinutes;
     [theirPrepButton setTitle:@"Pause" forState:UIControlStateNormal];
     isTheirPrepPaused = NO;
     NSLog(@"Resumes their timer");
+}
+- (void)resetTheirPrep
+{
+    theirCountUpCentiseconds = 0;
+    [storeData setInteger:theirCountUpCentiseconds forKey:@"theirCentiseconds"];
+    isTheirPrepStarted = NO;
+    isTheirPrepPaused = NO;
+    theirMinutes = 0;
+    theirSeconds = 0;
+    theirCentiseconds = 0;
+    [self setTheirLabel];
+    [theirPrepButton setTitle:@"Start" forState:UIControlStateNormal];
+    NSLog(@"Resetting their prep time");
+}
+- (IBAction)resetTheirPrepTap:(id)sender
+{
+    [self.theirPrepTimer invalidate];
+    [self resetTheirPrep];
 }
 
 - (void)didReceiveMemoryWarning
