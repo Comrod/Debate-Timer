@@ -9,9 +9,6 @@
 #import "ViewController.h"
 
 @interface TimerViewController : ViewController
-{
-    NSTimer *speechTimer;
-}
 
 @property (nonatomic) NSArray *policyTimes;
 @property (nonatomic) NSArray *policySpeeches;
@@ -20,8 +17,10 @@
 @property (nonatomic) NSArray *pfTimes;
 @property (nonatomic) NSArray *pfSpeeches;
 @property (nonatomic) NSUserDefaults *storeData;
+@property (nonatomic) NSTimer *speechTimer;
 @property (strong, nonatomic) IBOutlet UILabel *timerLabel;
 @property (strong, nonatomic) IBOutlet UILabel *speechLabel;
+@property (strong, nonatomic) IBOutlet UILabel *styleLabel;
 @property (strong, nonatomic) IBOutlet UIButton *startTimerButton;
 @property (strong, nonatomic) IBOutlet UIButton *backButton;
 

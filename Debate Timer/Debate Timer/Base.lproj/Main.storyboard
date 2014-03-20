@@ -115,6 +115,13 @@
                                     <action selector="backButtonTap:" destination="aJM-md-uNF" eventType="touchUpInside" id="3GT-tR-IGC"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Style of Debate" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5q6-AI-ska">
+                                <rect key="frame" x="0.0" y="128" width="320" height="54"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -124,6 +131,7 @@
                         <outlet property="backButton" destination="g4p-iK-2ER" id="2f4-uO-7ZT"/>
                         <outlet property="speechLabel" destination="koY-AN-3sY" id="w2S-gk-gHl"/>
                         <outlet property="startTimerButton" destination="uVK-xO-ZKL" id="7n5-xb-Tmf"/>
+                        <outlet property="styleLabel" destination="5q6-AI-ska" id="3R3-F4-iqi"/>
                         <outlet property="timerLabel" destination="d4r-0f-ikI" id="TgJ-ls-2xu"/>
                     </connections>
                 </viewController>

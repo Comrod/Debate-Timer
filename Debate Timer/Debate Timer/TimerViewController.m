@@ -43,7 +43,7 @@ BOOL timerPaused = NO;
     timerPaused = NO;
     
     //Policy Arrays
-    policyTimes = [NSArray arrayWithObjects: @1, @3, @8, @3, @8, @3, @8, @3, @5, @5, @5, @5, @0, nil];
+    policyTimes = [NSArray arrayWithObjects: @8, @3, @8, @3, @8, @3, @8, @3, @5, @5, @5, @5, @0, nil];
     policySpeeches = [NSArray arrayWithObjects:@"1AC", @"1st CX", @"1NC", @"2nd CX", @"2AC", @"3rd CX", @"2NC", @"4th CX", @"1NR", @"1AR", @"2NR", @"2AR", @"Round Finished", nil];
     
     //Lincoln-Douglas Arrays
@@ -57,25 +57,28 @@ BOOL timerPaused = NO;
     styleChosen = [storeData integerForKey:@"styleKey"];
     NSLog(@"Style of debate: %i", styleChosen);
     
-    if (styleChosen == 1)
+    if (styleChosen == 0)
     {
         //Policy
         [self setDataForPolicy];
         
+        self.styleLabel.text = [NSString stringWithFormat:@"Policy"];
         NSLog(@"Policy timing selected");
     }
-    else if (styleChosen == 2)
+    else if (styleChosen == 1)
     {
         //Lincoln-Douglas
         [self setDataForLD];
         
+        self.styleLabel.text = [NSString stringWithFormat:@"Lincoln-Douglas"];
         NSLog(@"LD timing selected");
     }
-    else if (styleChosen == 3)
+    else if (styleChosen == 2)
     {
         //Public Forum
         [self setDataForPFD];
         
+        self.styleLabel.text = [NSString stringWithFormat:@"Public Forum"];
         NSLog(@"PFD timing selected");
     }
     
@@ -153,7 +156,7 @@ BOOL timerPaused = NO;
 //Runs the timer
 - (void)timerRuns
 {
-    speechTimer = [NSTimer scheduledTimerWithTimeInterval:0.01f target:self selector:@selector(updateLabel:) userInfo:nil repeats:YES];
+    self.speechTimer = [NSTimer scheduledTimerWithTimeInterval:0.01f target:self selector:@selector(updateLabel:) userInfo:nil repeats:YES];
     speechCounter ++;
     NSLog(@"Timer has started");
 }
@@ -203,21 +206,21 @@ BOOL timerPaused = NO;
         [startTimerButton setTitle:@"Start Timer" forState:UIControlStateNormal];
         
         //Stops timer
-        [speechTimer invalidate];
+        [self.speechTimer invalidate];
     }
 }
 
 //Pauses timer
 - (void)pauseTimer
 {
-    [speechTimer setFireDate:[NSDate dateWithTimeIntervalSinceNow:31536000]];
+    [self.speechTimer setFireDate:[NSDate dateWithTimeIntervalSinceNow:31536000]];
     [startTimerButton setTitle:@"Start Timer" forState:UIControlStateNormal];
 }
 
 //Resumes timer
 - (void)resumeTimer
 {
-    [speechTimer setFireDate:[NSDate date]];
+    [self.speechTimer setFireDate:[NSDate date]];
     [startTimerButton setTitle:@"Pause Timer" forState:UIControlStateNormal];
 }
 
@@ -234,7 +237,7 @@ BOOL timerPaused = NO;
 - (IBAction)backButtonTap:(id)sender
 {
     //Stops timer
-    [speechTimer invalidate];
+    [self.speechTimer invalidate];
     
     //Changes view controller back to main view
     ViewController *vC = [self.storyboard instantiateViewControllerWithIdentifier:@"viewController"];

@@ -462,6 +462,7 @@
 				248167C318D937F100222A3B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		248167C418D937F100222A3B /* Build configuration list for PBXNativeTarget "Debate TimerTests" */ = {
 			isa = XCConfigurationList;
@@ -470,6 +471,7 @@
 				248167C618D937F100222A3B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
