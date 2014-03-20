@@ -33,7 +33,7 @@
 
 - (IBAction)tapPolicyButton:(id)sender
 {
-    self.whatStyle = 0;
+    self.whatStyle = 1;
     [storeData setInteger:self.whatStyle forKey:@"styleKey"];
     
     TimerViewController *timerVC = [self.storyboard instantiateViewControllerWithIdentifier:@"timerViewController"];
@@ -42,7 +42,7 @@
 
 - (IBAction)tapLDButton:(id)sender
 {
-    self.whatStyle = 1;
+    self.whatStyle = 2;
     [storeData setInteger:self.whatStyle forKey:@"styleKey"];
     
     TimerViewController *timerVC = [self.storyboard instantiateViewControllerWithIdentifier:@"timerViewController"];
@@ -51,7 +51,7 @@
 
 - (IBAction)tapPFButton:(id)sender
 {
-    self.whatStyle = 2;
+    self.whatStyle = 3;
     [storeData setInteger:self.whatStyle forKey:@"styleKey"];
     
     TimerViewController *timerVC = [self.storyboard instantiateViewControllerWithIdentifier:@"timerViewController"];

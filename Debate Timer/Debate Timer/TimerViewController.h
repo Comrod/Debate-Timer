@@ -8,7 +8,10 @@
 
 #import "ViewController.h"
 
-@interface TimerViewController : ViewController
+@interface TimerViewController : UIViewController <UIPickerViewDataSource , UIPickerViewDelegate>
+{
+    IBOutlet UIPickerView *singlePicker;
+}
 
 @property (nonatomic) NSArray *policyTimes;
 @property (nonatomic) NSArray *policySpeeches;
@@ -24,7 +27,11 @@
 @property (strong, nonatomic) IBOutlet UIButton *startTimerButton;
 @property (strong, nonatomic) IBOutlet UIButton *backButton;
 
+@property (nonatomic) NSArray *pickerData;
+@property(nonatomic , retain) UIPickerView *singlePicker;
+
 - (IBAction)startTimerButtonTap:(id)sender;
 - (IBAction)backButtonTap:(id)sender;
+
 
 @end

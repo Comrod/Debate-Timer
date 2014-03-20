@@ -15,7 +15,7 @@
 @end
 
 @implementation TimerViewController
-@synthesize policyTimes, policySpeeches, ldTimes, ldSpeeches, pfTimes, pfSpeeches, timerLabel, speechLabel, storeData, startTimerButton;
+@synthesize policyTimes, policySpeeches, ldTimes, ldSpeeches, pfTimes, pfSpeeches, timerLabel, speechLabel, storeData, startTimerButton, pickerData, singlePicker;
 
 int minutes, seconds, centiseconds, countdownTimeCentiseconds;
 int placeHolderMin;
@@ -57,26 +57,32 @@ BOOL timerPaused = NO;
     styleChosen = [storeData integerForKey:@"styleKey"];
     NSLog(@"Style of debate: %i", styleChosen);
     
-    if (styleChosen == 0)
+    if (styleChosen == 1)
     {
         //Policy
         [self setDataForPolicy];
         
+        self.pickerData = policySpeeches;
+        
         self.styleLabel.text = [NSString stringWithFormat:@"Policy"];
         NSLog(@"Policy timing selected");
     }
-    else if (styleChosen == 1)
+    else if (styleChosen == 2)
     {
         //Lincoln-Douglas
         [self setDataForLD];
         
+        self.pickerData = ldSpeeches;
+        
         self.styleLabel.text = [NSString stringWithFormat:@"Lincoln-Douglas"];
         NSLog(@"LD timing selected");
     }
-    else if (styleChosen == 2)
+    else if (styleChosen == 3)
     {
         //Public Forum
         [self setDataForPFD];
+        
+        self.pickerData = pfSpeeches;
         
         self.styleLabel.text = [NSString stringWithFormat:@"Public Forum"];
         NSLog(@"PFD timing selected");
@@ -89,18 +95,58 @@ BOOL timerPaused = NO;
 {
     speechLabel.text = [policySpeeches objectAtIndex:speechCounter];
     placeHolderMin = [[policyTimes objectAtIndex:speechCounter] intValue];
+    countdownTimeCentiseconds = [[policyTimes objectAtIndex:speechCounter] intValue] * 6000;
 }
 
 - (void)setDataForLD
 {
     speechLabel.text = [ldSpeeches objectAtIndex:speechCounter];
     placeHolderMin = [[ldTimes objectAtIndex:speechCounter] intValue];
+    countdownTimeCentiseconds = [[ldTimes objectAtIndex:speechCounter] intValue] * 6000;
 }
 
 - (void)setDataForPFD
 {
     speechLabel.text = [pfSpeeches objectAtIndex:speechCounter];
     placeHolderMin = [[pfTimes objectAtIndex:speechCounter] intValue];
+    countdownTimeCentiseconds = [[pfTimes objectAtIndex:speechCounter] intValue] * 6000;
+}
+
+//Pick specific speech
+-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+-(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return [pickerData count];
+}
+-(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    return[pickerData objectAtIndex:row];
+
+}
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    speechCounter = row;
+    
+    if (styleChosen == 1)
+    {
+        [self setDataForPolicy];
+    }
+    else if (styleChosen == 2)
+    {
+        [self setDataForLD];
+    }
+    else if (styleChosen == 3)
+    {
+        [self setDataForPFD];
+    }
+    
+    timerStarted = NO;
+    [self.speechTimer invalidate];
+    
+    self.timerLabel.text = [NSString stringWithFormat:@"%02d:00:00", placeHolderMin];
 }
 
 //Start button tap
@@ -108,20 +154,6 @@ BOOL timerPaused = NO;
 {
     if (!timerStarted)
     {
-        //Starts timer
-        if (styleChosen == 1)
-        {
-            countdownTimeCentiseconds = [[policyTimes objectAtIndex:speechCounter] intValue] * 6000;
-        }
-        else if (styleChosen == 2)
-        {
-            countdownTimeCentiseconds = [[ldTimes objectAtIndex:speechCounter] intValue] * 6000;
-        }
-        else if (styleChosen == 3)
-        {
-            countdownTimeCentiseconds = [[pfTimes objectAtIndex:speechCounter] intValue] * 6000;
-        }
-        
         if (countdownTimeCentiseconds > 0)
         {
             [self timerRuns];
@@ -214,7 +246,7 @@ BOOL timerPaused = NO;
 - (void)pauseTimer
 {
     [self.speechTimer setFireDate:[NSDate dateWithTimeIntervalSinceNow:31536000]];
-    [startTimerButton setTitle:@"Start Timer" forState:UIControlStateNormal];
+    [startTimerButton setTitle:@"Resume Timer" forState:UIControlStateNormal];
 }
 
 //Resumes timer
