@@ -14,6 +14,8 @@
 
 @implementation SettingsViewController
 
+@synthesize storeData;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -27,6 +29,17 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    storeData = [NSUserDefaults standardUserDefaults];
+    
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isCenti"])
+    {
+        [self.centisecondSegControl setSelectedSegmentIndex:0];
+    }
+    else if (![[NSUserDefaults standardUserDefaults] boolForKey:@"isCenti"])
+    {
+        [self.centisecondSegControl setSelectedSegmentIndex:1];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -46,6 +59,20 @@
 }
 */
 
-- (IBAction)backButtonTap:(id)sender {
+- (IBAction)backButtonTap:(id)sender
+{
+    
+}
+
+- (IBAction)centisecondValueChanged:(id)sender
+{
+    if ([self.centisecondSegControl selectedSegmentIndex] == 0)
+    {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isCenti"];
+    }
+    else if ([self.centisecondSegControl selectedSegmentIndex] == 1)
+    {
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isCenti"];
+    }
 }
 @end

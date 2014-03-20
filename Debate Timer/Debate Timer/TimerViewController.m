@@ -8,7 +8,7 @@
 
 #import "TimerViewController.h"
 #import "ViewController.h"
-#import <AudioToolbox/AudioToolbox.h>
+#import "SettingsViewController.h"
 
 @interface TimerViewController ()
 
@@ -94,7 +94,17 @@ BOOL pickerIsShowing = NO;
         NSLog(@"PFD timing selected");
     }
     
-    self.timerLabel.text = [NSString stringWithFormat:@"%02d:00:00", placeHolderMin];
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isCenti"])
+    {
+        self.timerLabel.text = [NSString stringWithFormat:@"%02d:00:00", placeHolderMin];
+        NSLog(@"Showing centiseconds");
+    }
+    else if (![[NSUserDefaults standardUserDefaults] boolForKey:@"isCenti"])
+    {
+        self.timerLabel.text = [NSString stringWithFormat:@"%02d:00", placeHolderMin];
+        NSLog(@"Not showing centiseconds");
+    }
+    
 }
 
 - (void)setDataForPolicy
@@ -153,7 +163,15 @@ BOOL pickerIsShowing = NO;
     [self.speechTimer invalidate];
     
     [startTimerButton setTitle:@"Start Timer" forState:UIControlStateNormal];
-    self.timerLabel.text = [NSString stringWithFormat:@"%02d:00:00", placeHolderMin];
+    
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isCenti"])
+    {
+        self.timerLabel.text = [NSString stringWithFormat:@"%02d:00:00", placeHolderMin];
+    }
+    else if (![[NSUserDefaults standardUserDefaults] boolForKey:@"isCenti"])
+    {
+        self.timerLabel.text = [NSString stringWithFormat:@"%02d:00", placeHolderMin];
+    }
 }
 
 //Start button tap
@@ -210,7 +228,15 @@ BOOL pickerIsShowing = NO;
         seconds = (countdownTimeCentiseconds / 100) % 60;
         minutes = (countdownTimeCentiseconds / 100) / 60;
         
-        self.timerLabel.text = [NSString stringWithFormat:@"%02d:%02d:%02d", minutes, seconds, centiseconds];
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isCenti"])
+        {
+            self.timerLabel.text = [NSString stringWithFormat:@"%02d:%02d:%02d", minutes, seconds, centiseconds];
+        }
+        else if (![[NSUserDefaults standardUserDefaults] boolForKey:@"isCenti"])
+        {
+            self.timerLabel.text = [NSString stringWithFormat:@"%02d:%02d", minutes, seconds];
+        }
+            
         NSLog(@"Total countdown time: %i", countdownTimeCentiseconds);
     }
     else

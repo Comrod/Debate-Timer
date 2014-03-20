@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "SettingsViewController.h"
 
 @interface TimerViewController : UIViewController <UIPickerViewDataSource , UIPickerViewDelegate>
 {

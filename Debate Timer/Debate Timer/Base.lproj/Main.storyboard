@@ -87,13 +87,16 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="cAp-6n-Mmx">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" id="cAp-6n-Mmx">
                                 <rect key="frame" x="50" y="145" width="221" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
                                     <segment title="Centiseconds"/>
                                     <segment title="No Centiseconds"/>
                                 </segments>
+                                <connections>
+                                    <action selector="centisecondValueChanged:" destination="rjQ-5g-VDD" eventType="valueChanged" id="9E6-yX-xDs"/>
+                                </connections>
                             </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="LRF-Fk-eau">
                                 <rect key="frame" x="67" y="518" width="187" height="30"/>
