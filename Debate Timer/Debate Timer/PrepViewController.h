@@ -10,11 +10,14 @@
 
 @interface PrepViewController : UIViewController
 
+//Your prep
 @property (strong, nonatomic) IBOutlet UILabel *yourPrepLabel;
-@property (strong, nonatomic) IBOutlet UILabel *theirPrepLabel;
 @property (strong, nonatomic) IBOutlet UIButton *yourPrepButton;
-@property (strong, nonatomic) IBOutlet UIButton *theirPrepButton;
 @property (nonatomic) NSTimer *yourPrepTimer;
+
+//Their prep
+@property (strong, nonatomic) IBOutlet UILabel *theirPrepLabel;
+@property (strong, nonatomic) IBOutlet UIButton *theirPrepButton;
 @property (nonatomic) NSTimer *theirPrepTimer;
 
 @property (nonatomic) NSUserDefaults *storeData;
