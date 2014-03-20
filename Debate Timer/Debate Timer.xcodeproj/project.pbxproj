@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2470EC1118DAAAF2004618B4 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2470EC1018DAAAF2004618B4 /* SettingsViewController.m */; };
 		2481679318D937F100222A3B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2481679218D937F100222A3B /* Foundation.framework */; };
 		2481679518D937F100222A3B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2481679418D937F100222A3B /* CoreGraphics.framework */; };
 		2481679718D937F100222A3B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2481679618D937F100222A3B /* UIKit.framework */; };
@@ -35,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2470EC0F18DAAAF2004618B4 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		2470EC1018DAAAF2004618B4 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		2481678F18D937F100222A3B /* Debate Timer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Debate Timer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2481679218D937F100222A3B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2481679418D937F100222A3B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -122,6 +125,8 @@
 				248167A818D937F100222A3B /* ViewController.m */,
 				248167C718D93A8900222A3B /* TimerViewController.h */,
 				248167C818D93A8900222A3B /* TimerViewController.m */,
+				2470EC0F18DAAAF2004618B4 /* SettingsViewController.h */,
+				2470EC1018DAAAF2004618B4 /* SettingsViewController.m */,
 				248167AA18D937F100222A3B /* Images.xcassets */,
 				2481679918D937F100222A3B /* Supporting Files */,
 			);
@@ -256,6 +261,7 @@
 			files = (
 				248167C918D93A8900222A3B /* TimerViewController.m in Sources */,
 				248167A918D937F100222A3B /* ViewController.m in Sources */,
+				2470EC1118DAAAF2004618B4 /* SettingsViewController.m in Sources */,
 				248167A318D937F100222A3B /* AppDelegate.m in Sources */,
 				2481679F18D937F100222A3B /* main.m in Sources */,
 			);

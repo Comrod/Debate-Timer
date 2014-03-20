@@ -24,6 +24,7 @@ int styleChosen;
 BOOL alertShown = NO;
 BOOL timerStarted = NO;
 BOOL timerPaused = NO;
+BOOL pickerIsShowing = NO;
 
 
 - (void)viewDidLoad
@@ -54,6 +55,8 @@ BOOL timerPaused = NO;
     pfTimes = [NSArray arrayWithObjects:@4, @4, @3, @4, @4, @3, @2, @2, @3, @2, @2, @0, nil];
     pfSpeeches = [NSArray arrayWithObjects:@"Team A Constructive", @"Team B Constructive", @"Crossfire", @"Team A Rebuttal", @"Team B Rebuttal", @"Crossfire", @"Team A Summary", @"Team B Summary", @"Grand Crossfire", @"Team A Final", @"Team B Final", @"Round Finished", nil];
 
+    singlePicker.center = CGPointMake(singlePicker.center.x, singlePicker.center.y + self.view.frame.size.height);
+    
     styleChosen = [storeData integerForKey:@"styleKey"];
     NSLog(@"Style of debate: %i", styleChosen);
     
@@ -149,6 +152,7 @@ BOOL timerPaused = NO;
     timerStarted = NO;
     [self.speechTimer invalidate];
     
+    [startTimerButton setTitle:@"Start Timer" forState:UIControlStateNormal];
     self.timerLabel.text = [NSString stringWithFormat:@"%02d:00:00", placeHolderMin];
 }
 
@@ -277,6 +281,33 @@ BOOL timerPaused = NO;
     //Changes view controller back to main view
     ViewController *vC = [self.storyboard instantiateViewControllerWithIdentifier:@"viewController"];
     [self presentViewController:vC animated:YES completion:nil];
+}
+
+- (IBAction)showPickerButtonTap:(id)sender
+{
+    if (!pickerIsShowing)
+    {
+        CGPoint newPickerCenter = CGPointMake(singlePicker.center.x, singlePicker.center.y - self.view.frame.size.height);
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDuration:0.5f];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+        singlePicker.center = newPickerCenter;
+        [UIView commitAnimations];
+        pickerIsShowing = YES;
+    }
+    else if (pickerIsShowing)
+    {
+        CGPoint newPickerCenter = CGPointMake(singlePicker.center.x, singlePicker.center.y + self.view.frame.size.height);
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDuration:0.5f];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+        singlePicker.center = newPickerCenter;
+        [UIView commitAnimations];
+        pickerIsShowing = NO;
+    }
+}
+
+- (IBAction)settingsButtonTap:(id)sender {
 }
 
 - (void)didReceiveMemoryWarning

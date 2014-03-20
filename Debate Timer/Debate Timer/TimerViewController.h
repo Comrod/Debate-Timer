@@ -26,12 +26,19 @@
 @property (strong, nonatomic) IBOutlet UILabel *styleLabel;
 @property (strong, nonatomic) IBOutlet UIButton *startTimerButton;
 @property (strong, nonatomic) IBOutlet UIButton *backButton;
+@property (strong, nonatomic) IBOutlet UIButton *settingsButton;
+
+@property (strong, nonatomic) IBOutlet UIButton *showPickerButton;
+
 
 @property (nonatomic) NSArray *pickerData;
-@property(nonatomic , retain) UIPickerView *singlePicker;
+@property(nonatomic, retain) UIPickerView *singlePicker;
 
 - (IBAction)startTimerButtonTap:(id)sender;
 - (IBAction)backButtonTap:(id)sender;
+- (IBAction)showPickerButtonTap:(id)sender;
+- (IBAction)settingsButtonTap:(id)sender;
+
 
 
 @end
