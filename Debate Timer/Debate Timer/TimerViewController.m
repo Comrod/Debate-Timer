@@ -26,7 +26,6 @@ BOOL timerStarted = NO;
 BOOL timerPaused = NO;
 BOOL pickerIsShowing = NO;
 
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -34,6 +33,8 @@ BOOL pickerIsShowing = NO;
     
     //Set up data storage
     storeData = [NSUserDefaults standardUserDefaults];
+    
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isCenti"];
     
     [startTimerButton setTitle:@"Start Timer" forState:UIControlStateNormal];
     
@@ -44,7 +45,7 @@ BOOL pickerIsShowing = NO;
     timerPaused = NO;
     
     //Policy Arrays
-    policyTimes = [NSArray arrayWithObjects: @8, @3, @8, @3, @8, @3, @8, @3, @5, @5, @5, @5, @0, nil];
+    policyTimes = [NSArray arrayWithObjects: @1, @3, @8, @3, @8, @3, @8, @3, @5, @5, @5, @5, @0, nil];
     policySpeeches = [NSArray arrayWithObjects:@"1AC", @"1st CX", @"1NC", @"2nd CX", @"2AC", @"3rd CX", @"2NC", @"4th CX", @"1NR", @"1AR", @"2NR", @"2AR", @"Round Finished", nil];
     
     //Lincoln-Douglas Arrays
@@ -94,6 +95,7 @@ BOOL pickerIsShowing = NO;
         NSLog(@"PFD timing selected");
     }
     
+    //Determines if centiseconds are shown
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isCenti"])
     {
         self.timerLabel.text = [NSString stringWithFormat:@"%02d:00:00", placeHolderMin];
@@ -126,52 +128,6 @@ BOOL pickerIsShowing = NO;
     speechLabel.text = [pfSpeeches objectAtIndex:speechCounter];
     placeHolderMin = [[pfTimes objectAtIndex:speechCounter] intValue];
     countdownTimeCentiseconds = [[pfTimes objectAtIndex:speechCounter] intValue] * 6000;
-}
-
-//Pick specific speech
--(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
-{
-    return 1;
-}
--(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
-{
-    return [pickerData count];
-}
--(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
-{
-    return[pickerData objectAtIndex:row];
-
-}
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
-{
-    speechCounter = row;
-    
-    if (styleChosen == 1)
-    {
-        [self setDataForPolicy];
-    }
-    else if (styleChosen == 2)
-    {
-        [self setDataForLD];
-    }
-    else if (styleChosen == 3)
-    {
-        [self setDataForPFD];
-    }
-    
-    timerStarted = NO;
-    [self.speechTimer invalidate];
-    
-    [startTimerButton setTitle:@"Start Timer" forState:UIControlStateNormal];
-    
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isCenti"])
-    {
-        self.timerLabel.text = [NSString stringWithFormat:@"%02d:00:00", placeHolderMin];
-    }
-    else if (![[NSUserDefaults standardUserDefaults] boolForKey:@"isCenti"])
-    {
-        self.timerLabel.text = [NSString stringWithFormat:@"%02d:00", placeHolderMin];
-    }
 }
 
 //Start button tap
@@ -228,6 +184,7 @@ BOOL pickerIsShowing = NO;
         seconds = (countdownTimeCentiseconds / 100) % 60;
         minutes = (countdownTimeCentiseconds / 100) / 60;
         
+        //Determines if centiseconds are shown
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isCenti"])
         {
             self.timerLabel.text = [NSString stringWithFormat:@"%02d:%02d:%02d", minutes, seconds, centiseconds];
@@ -241,10 +198,10 @@ BOOL pickerIsShowing = NO;
     }
     else
     {
+        
         //Shows alert that the speech is finished
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Timer done" message:@"Speech is finished" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-        
         
         //Set labels for next speech
         if (styleChosen == 1)
@@ -309,8 +266,19 @@ BOOL pickerIsShowing = NO;
     [self presentViewController:vC animated:YES completion:nil];
 }
 
+- (IBAction)settingsButtonTap:(id)sender
+{
+
+}
+
+- (IBAction)prepButtonTap:(id)sender
+{
+
+}
+
 - (IBAction)showPickerButtonTap:(id)sender
 {
+    
     if (!pickerIsShowing)
     {
         CGPoint newPickerCenter = CGPointMake(singlePicker.center.x, singlePicker.center.y - self.view.frame.size.height);
@@ -333,7 +301,50 @@ BOOL pickerIsShowing = NO;
     }
 }
 
-- (IBAction)settingsButtonTap:(id)sender {
+//Pick specific speech
+-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 1;
+}
+-(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return [pickerData count];
+}
+-(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    return[pickerData objectAtIndex:row];
+    
+}
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    speechCounter = row;
+    
+    if (styleChosen == 1)
+    {
+        [self setDataForPolicy];
+    }
+    else if (styleChosen == 2)
+    {
+        [self setDataForLD];
+    }
+    else if (styleChosen == 3)
+    {
+        [self setDataForPFD];
+    }
+    
+    timerStarted = NO;
+    [self.speechTimer invalidate];
+    
+    [startTimerButton setTitle:@"Start Timer" forState:UIControlStateNormal];
+    
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isCenti"])
+    {
+        self.timerLabel.text = [NSString stringWithFormat:@"%02d:00:00", placeHolderMin];
+    }
+    else if (![[NSUserDefaults standardUserDefaults] boolForKey:@"isCenti"])
+    {
+        self.timerLabel.text = [NSString stringWithFormat:@"%02d:00", placeHolderMin];
+    }
 }
 
 - (void)didReceiveMemoryWarning

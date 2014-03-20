@@ -14,32 +14,38 @@
     IBOutlet UIPickerView *singlePicker;
 }
 
+//Speeches and times
 @property (nonatomic) NSArray *policyTimes;
 @property (nonatomic) NSArray *policySpeeches;
 @property (nonatomic) NSArray *ldTimes;
 @property (nonatomic) NSArray *ldSpeeches;
 @property (nonatomic) NSArray *pfTimes;
 @property (nonatomic) NSArray *pfSpeeches;
-@property (nonatomic) NSUserDefaults *storeData;
-@property (nonatomic) NSTimer *speechTimer;
-@property (strong, nonatomic) IBOutlet UILabel *timerLabel;
 @property (strong, nonatomic) IBOutlet UILabel *speechLabel;
 @property (strong, nonatomic) IBOutlet UILabel *styleLabel;
+
+@property (nonatomic) NSUserDefaults *storeData;
+
+//Timer
+@property (nonatomic) NSTimer *speechTimer;
+@property (strong, nonatomic) IBOutlet UILabel *timerLabel;
 @property (strong, nonatomic) IBOutlet UIButton *startTimerButton;
+
+//Switch
 @property (strong, nonatomic) IBOutlet UIButton *backButton;
 @property (strong, nonatomic) IBOutlet UIButton *settingsButton;
+@property (strong, nonatomic) IBOutlet UIButton *prepButton;
 
+//Picker
 @property (strong, nonatomic) IBOutlet UIButton *showPickerButton;
-
-
 @property (nonatomic) NSArray *pickerData;
 @property(nonatomic, retain) UIPickerView *singlePicker;
+
 
 - (IBAction)startTimerButtonTap:(id)sender;
 - (IBAction)backButtonTap:(id)sender;
 - (IBAction)showPickerButtonTap:(id)sender;
 - (IBAction)settingsButtonTap:(id)sender;
-
-
+- (IBAction)prepButtonTap:(id)sender;
 
 @end

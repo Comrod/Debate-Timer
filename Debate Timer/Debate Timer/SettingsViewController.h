@@ -11,12 +11,8 @@
 @interface SettingsViewController : UIViewController
 
 @property (strong, nonatomic) IBOutlet UISegmentedControl *centisecondSegControl;
-@property (strong, nonatomic) IBOutlet UIButton *backButton;
-@property (nonatomic) NSUserDefaults *storeData;
 
 
-- (IBAction)backButtonTap:(id)sender;
 - (IBAction)centisecondValueChanged:(id)sender;
-
 
 @end

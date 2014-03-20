@@ -14,8 +14,6 @@
 
 @implementation SettingsViewController
 
-@synthesize storeData;
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -29,8 +27,6 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    storeData = [NSUserDefaults standardUserDefaults];
     
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isCenti"])
     {
@@ -58,11 +54,6 @@
     // Pass the selected object to the new view controller.
 }
 */
-
-- (IBAction)backButtonTap:(id)sender
-{
-    
-}
 
 - (IBAction)centisecondValueChanged:(id)sender
 {

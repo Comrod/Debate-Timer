@@ -23,6 +23,8 @@
 	// Do any additional setup after loading the view, typically from a nib.
     
     storeData = [NSUserDefaults standardUserDefaults];
+    
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"goneHome"];
 }
 
 - (void)didReceiveMemoryWarning
