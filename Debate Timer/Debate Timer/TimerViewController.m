@@ -62,6 +62,7 @@ BOOL timerPaused = NO;
         //Policy
         [self setDataForPolicy];
         
+        //Set picker data
         self.pickerData = policySpeeches;
         
         self.styleLabel.text = [NSString stringWithFormat:@"Policy"];
@@ -72,6 +73,7 @@ BOOL timerPaused = NO;
         //Lincoln-Douglas
         [self setDataForLD];
         
+        //Set picker data
         self.pickerData = ldSpeeches;
         
         self.styleLabel.text = [NSString stringWithFormat:@"Lincoln-Douglas"];
@@ -82,6 +84,7 @@ BOOL timerPaused = NO;
         //Public Forum
         [self setDataForPFD];
         
+        //Set picker data
         self.pickerData = pfSpeeches;
         
         self.styleLabel.text = [NSString stringWithFormat:@"Public Forum"];
