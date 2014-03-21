@@ -214,6 +214,17 @@
                                     <action selector="centisecondValueChanged:" destination="rjQ-5g-VDD" eventType="valueChanged" id="9E6-yX-xDs"/>
                                 </connections>
                             </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="fX9-cx-OsJ">
+                                <rect key="frame" x="131" y="424" width="59" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <state key="normal" title="Back">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="aJM-md-uNF" kind="modal" modalTransitionStyle="crossDissolve" id="WtQ-tT-7lT"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -291,10 +302,10 @@
                                 </connections>
                             </pickerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="V0m-JS-8dS">
-                                <rect key="frame" x="69" y="261" width="182" height="30"/>
+                                <rect key="frame" x="69" y="255" width="182" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <state key="normal" title="Change Speech">
+                                <state key="normal" title="Show Speeches">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -310,7 +321,7 @@
                                 </state>
                                 <connections>
                                     <action selector="settingsButtonTap:" destination="aJM-md-uNF" eventType="touchUpInside" id="YmH-HJ-B6m"/>
-                                    <segue destination="rjQ-5g-VDD" kind="modal" modalTransitionStyle="partialCurl" id="v4Z-zd-DFQ"/>
+                                    <segue destination="rjQ-5g-VDD" kind="modal" modalTransitionStyle="crossDissolve" id="v4Z-zd-DFQ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="qoL-qW-PgS">
@@ -347,8 +358,8 @@
                         <outlet property="resetTimerButton" destination="H30-Kw-7gj" id="T9A-9A-zN5"/>
                         <outlet property="settingsButton" destination="ysg-UC-x40" id="GRb-BA-q7I"/>
                         <outlet property="showPickerButton" destination="V0m-JS-8dS" id="VVC-x1-X9u"/>
-                        <outlet property="singlePicker" destination="5ju-tZ-u9l" id="Yu6-gd-8cL"/>
                         <outlet property="speechLabel" destination="koY-AN-3sY" id="w2S-gk-gHl"/>
+                        <outlet property="speechPicker" destination="5ju-tZ-u9l" id="l6t-7S-TYV"/>
                         <outlet property="startTimerButton" destination="uVK-xO-ZKL" id="7n5-xb-Tmf"/>
                         <outlet property="styleLabel" destination="5q6-AI-ska" id="3R3-F4-iqi"/>
                         <outlet property="timerLabel" destination="d4r-0f-ikI" id="TgJ-ls-2xu"/>
@@ -364,4 +375,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="WtQ-tT-7lT"/>
+    </inferredMetricsTieBreakers>
 </document>

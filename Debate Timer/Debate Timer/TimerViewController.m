@@ -15,7 +15,7 @@
 @end
 
 @implementation TimerViewController
-@synthesize policyTimes, policySpeeches, ldTimes, ldSpeeches, pfTimes, pfSpeeches, timerLabel, speechLabel, storeData, startTimerButton, pickerData, singlePicker;
+@synthesize policyTimes, policySpeeches, ldTimes, ldSpeeches, pfTimes, pfSpeeches, timerLabel, speechLabel, storeData, startTimerButton, pickerData, speechPicker;
 
 int minutes, seconds, centiseconds, countdownTimeCentiseconds;
 int placeHolderMin;
@@ -45,9 +45,19 @@ BOOL pickerIsShowing = NO;
     else
     {
         [self getDataFromStorage];
-        [startTimerButton setTitle:@"Resume Timer" forState:UIControlStateNormal];
-        timerStarted = YES;
-        timerPaused = YES;
+        
+        if (!timerStarted)
+        {
+            [startTimerButton setTitle:@"Start Timer" forState:UIControlStateNormal];
+            NSLog(@"Timer hasn't started");
+        }
+        else
+        {
+            [startTimerButton setTitle:@"Resume Timer" forState:UIControlStateNormal];
+            timerStarted = YES;
+            timerPaused = YES;
+            NSLog(@"Timer has started");
+        }
     }
     
     
@@ -63,7 +73,7 @@ BOOL pickerIsShowing = NO;
     pfTimes = [NSArray arrayWithObjects:@4, @4, @3, @4, @4, @3, @2, @2, @3, @2, @2, @0, nil];
     pfSpeeches = [NSArray arrayWithObjects:@"Team A Constructive", @"Team B Constructive", @"Crossfire", @"Team A Rebuttal", @"Team B Rebuttal", @"Crossfire", @"Team A Summary", @"Team B Summary", @"Grand Crossfire", @"Team A Final", @"Team B Final", @"Round Finished", nil];
 
-    singlePicker.center = CGPointMake(singlePicker.center.x, singlePicker.center.y + self.view.frame.size.height);
+    speechPicker.center = CGPointMake(speechPicker.center.x, speechPicker.center.y + self.view.frame.size.height);
     
     [self getStyleandSetData];
     
@@ -71,6 +81,7 @@ BOOL pickerIsShowing = NO;
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"goneHome"];
 }
 
+#pragma mark - Getters and Setters
 - (void)getStyleandSetData
 {
     styleChosen = [storeData integerForKey:@"styleKey"];
@@ -140,7 +151,6 @@ BOOL pickerIsShowing = NO;
         NSLog(@"Not showing centiseconds");
     }
 }
-
 - (void)setDataToStorage
 {
     [storeData setInteger:countdownTimeCentiseconds forKey:@"countdownTime"];
@@ -165,21 +175,18 @@ BOOL pickerIsShowing = NO;
     
     NSLog(@"Got data from storage");
 }
-
 - (void)setDataForPolicy
 {
     speechLabel.text = [policySpeeches objectAtIndex:speechCounter];
     placeHolderMin = [[policyTimes objectAtIndex:speechCounter] intValue];
     countdownTimeCentiseconds = [[policyTimes objectAtIndex:speechCounter] intValue] * 6000;
 }
-
 - (void)setDataForLD
 {
     speechLabel.text = [ldSpeeches objectAtIndex:speechCounter];
     placeHolderMin = [[ldTimes objectAtIndex:speechCounter] intValue];
     countdownTimeCentiseconds = [[ldTimes objectAtIndex:speechCounter] intValue] * 6000;
 }
-
 - (void)setDataForPFD
 {
     speechLabel.text = [pfSpeeches objectAtIndex:speechCounter];
@@ -187,6 +194,7 @@ BOOL pickerIsShowing = NO;
     countdownTimeCentiseconds = [[pfTimes objectAtIndex:speechCounter] intValue] * 6000;
 }
 
+#pragma mark - Timer
 //Start button tap
 - (IBAction)startTimerButtonTap:(id)sender
 {
@@ -220,7 +228,6 @@ BOOL pickerIsShowing = NO;
         }
     }
 }
-
 //Runs the timer
 - (void)timerRuns
 {
@@ -234,7 +241,6 @@ BOOL pickerIsShowing = NO;
     timerFinished = NO;
     NSLog(@"Timer has started");
 }
-
 //Effectively the timer
 - (void)updateLabel:(NSTimer *)timer
 {
@@ -248,7 +254,7 @@ BOOL pickerIsShowing = NO;
         [self setTimerLabelText];
         
         [self setDataToStorage];
-        NSLog(@"Total countdown time: %i", countdownTimeCentiseconds);
+        //NSLog(@"Total countdown time: %i", countdownTimeCentiseconds);
     }
     else
     {
@@ -289,6 +295,7 @@ BOOL pickerIsShowing = NO;
     }
 }
 
+#pragma - Modify Timer Code
 //Pauses timer
 - (void)pauseTimer
 {
@@ -296,7 +303,6 @@ BOOL pickerIsShowing = NO;
     [startTimerButton setTitle:@"Resume Timer" forState:UIControlStateNormal];
     timerPaused = YES;
 }
-
 //Resumes timer
 - (void)resumeTimer
 {
@@ -304,7 +310,6 @@ BOOL pickerIsShowing = NO;
     [startTimerButton setTitle:@"Pause Timer" forState:UIControlStateNormal];
     timerPaused = NO;
 }
-
 - (void)resetTimer
 {
     [self.speechTimer invalidate];
@@ -336,7 +341,6 @@ BOOL pickerIsShowing = NO;
     [startTimerButton setTitle:@"Start Timer" forState:UIControlStateNormal];
     NSLog(@"Reset timer");
 }
-
 - (void)roundOver
 {
     UIAlertView *roundOverAlert = [[UIAlertView alloc] initWithTitle:@"Round is Over" message:@"Round is over, you've been sent back to the selection screen" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -345,7 +349,6 @@ BOOL pickerIsShowing = NO;
     ViewController *vC = [self.storyboard instantiateViewControllerWithIdentifier:@"viewController"];
     [self presentViewController:vC animated:YES completion:nil];
 }
-
 //Back button tap
 - (IBAction)backButtonTap:(id)sender
 {
@@ -356,22 +359,20 @@ BOOL pickerIsShowing = NO;
     ViewController *vC = [self.storyboard instantiateViewControllerWithIdentifier:@"viewController"];
     [self presentViewController:vC animated:YES completion:nil];
 }
-
 - (IBAction)settingsButtonTap:(id)sender
 {
 
 }
-
 - (IBAction)prepButtonTap:(id)sender
 {
 
 }
-
 - (IBAction)resetTimerButtonTap:(id)sender
 {
     [self resetTimer];
 }
 
+#pragma mark - Speech Picker
 - (IBAction)showPickerButtonTap:(id)sender
 {
     
@@ -384,34 +385,34 @@ BOOL pickerIsShowing = NO;
         [self hidePicker];
     }
 }
-
 - (void)showPicker
 {
     //Sets picker to selected row
-    [singlePicker selectRow:speechCounter inComponent:0 animated:YES];
+    [speechPicker selectRow:speechCounter inComponent:0 animated:YES];
+    [self.showPickerButton setTitle:@"Hide Speeches" forState:UIControlStateNormal];
     
     //Animates picker
-    CGPoint newPickerCenter = CGPointMake(singlePicker.center.x, singlePicker.center.y - self.view.frame.size.height);
+    CGPoint newPickerCenter = CGPointMake(speechPicker.center.x, speechPicker.center.y - self.view.frame.size.height);
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.5f];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
-    singlePicker.center = newPickerCenter;
+    speechPicker.center = newPickerCenter;
     [UIView commitAnimations];
     pickerIsShowing = YES;
 }
 - (void)hidePicker
 {
+    [self.showPickerButton setTitle:@"Show Speeches" forState:UIControlStateNormal];
+    
     //Animates picker
-    CGPoint newPickerCenter = CGPointMake(singlePicker.center.x, singlePicker.center.y + self.view.frame.size.height);
+    CGPoint newPickerCenter = CGPointMake(speechPicker.center.x, speechPicker.center.y + self.view.frame.size.height);
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.5f];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
-    singlePicker.center = newPickerCenter;
+    speechPicker.center = newPickerCenter;
     [UIView commitAnimations];
     pickerIsShowing = NO;
 }
-
-//Pick specific speech
 -(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
     return 1;

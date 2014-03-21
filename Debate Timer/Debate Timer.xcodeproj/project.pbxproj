@@ -128,10 +128,10 @@
 				248167A818D937F100222A3B /* ViewController.m */,
 				248167C718D93A8900222A3B /* TimerViewController.h */,
 				248167C818D93A8900222A3B /* TimerViewController.m */,
-				2470EC0F18DAAAF2004618B4 /* SettingsViewController.h */,
-				2470EC1018DAAAF2004618B4 /* SettingsViewController.m */,
 				2470EC1318DB7D3E004618B4 /* PrepViewController.h */,
 				2470EC1418DB7D3E004618B4 /* PrepViewController.m */,
+				2470EC0F18DAAAF2004618B4 /* SettingsViewController.h */,
+				2470EC1018DAAAF2004618B4 /* SettingsViewController.m */,
 				248167AA18D937F100222A3B /* Images.xcassets */,
 				2481679918D937F100222A3B /* Supporting Files */,
 			);

@@ -55,6 +55,7 @@ int styleChosen = 0;
     
     styleChosen = [storeData integerForKey:@"styleKey"];
     
+    
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"goneHome"])
     {
         //Resets prep time if you have gone to the home screen

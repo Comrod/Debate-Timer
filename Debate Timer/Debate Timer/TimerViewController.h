@@ -11,7 +11,7 @@
 
 @interface TimerViewController : UIViewController <UIPickerViewDataSource , UIPickerViewDelegate>
 {
-    IBOutlet UIPickerView *singlePicker;
+    IBOutlet UIPickerView *speechPicker;
 }
 
 //Speeches and times
@@ -40,7 +40,7 @@
 //Picker
 @property (strong, nonatomic) IBOutlet UIButton *showPickerButton;
 @property (nonatomic) NSArray *pickerData;
-@property(nonatomic, retain) UIPickerView *singlePicker;
+@property(nonatomic, retain) UIPickerView *speechPicker;
 
 
 - (IBAction)startTimerButtonTap:(id)sender;
