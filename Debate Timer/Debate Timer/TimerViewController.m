@@ -23,6 +23,7 @@ int speechCounter = 0;
 int styleChosen;
 BOOL alertShown = NO;
 BOOL timerStarted = NO;
+BOOL timerFinished = NO;
 BOOL timerPaused = NO;
 BOOL pickerIsShowing = NO;
 
@@ -59,7 +60,7 @@ BOOL pickerIsShowing = NO;
     
     
     //Policy Arrays
-    policyTimes = [NSArray arrayWithObjects: @1, @3, @8, @3, @8, @3, @8, @3, @5, @5, @5, @5, @0, nil];
+    policyTimes = [NSArray arrayWithObjects: @8, @3, @8, @3, @8, @3, @8, @3, @5, @5, @5, @5, @0, nil];
     policySpeeches = [NSArray arrayWithObjects:@"1AC", @"1st CX", @"1NC", @"2nd CX", @"2AC", @"3rd CX", @"2NC", @"4th CX", @"1NR", @"1AR", @"2NR", @"2AR", @"Round Finished", nil];
     
     //Lincoln-Douglas Arrays
@@ -117,7 +118,7 @@ BOOL pickerIsShowing = NO;
     //Determines if centiseconds are shown
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isCenti"])
     {
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"goneHome"])
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"goneHome"] || timerFinished)
         {
             self.timerLabel.text = [NSString stringWithFormat:@"%02d:00:00", placeHolderMin];
         }
@@ -130,7 +131,7 @@ BOOL pickerIsShowing = NO;
     }
     else if (![[NSUserDefaults standardUserDefaults] boolForKey:@"isCenti"])
     {
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"goneHome"])
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"goneHome"] || timerFinished)
         {
             self.timerLabel.text = [NSString stringWithFormat:@"%02d:00", placeHolderMin];
         }
@@ -233,6 +234,7 @@ BOOL pickerIsShowing = NO;
     
     self.speechTimer = [NSTimer scheduledTimerWithTimeInterval:0.01f target:self selector:@selector(updateLabel:) userInfo:nil repeats:YES];
     timerStarted = YES;
+    timerFinished = NO;
     NSLog(@"Timer has started");
 }
 
@@ -253,11 +255,13 @@ BOOL pickerIsShowing = NO;
     }
     else
     {
-        speechCounter ++;
+        timerFinished = YES;
         
         //Shows alert that the speech is finished
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Timer done" message:@"Speech is finished" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
+        
+        speechCounter ++;
         
         //Set labels for next speech
         if (styleChosen == 1)
@@ -277,7 +281,7 @@ BOOL pickerIsShowing = NO;
         }
         
         //Set placeholder time
-        self.timerLabel.text = [NSString stringWithFormat:@"%02d:00", placeHolderMin];
+        [self setTimerLabelText];
         
         //Reset pausing mechanism and button label
         timerStarted = NO;
@@ -339,24 +343,35 @@ BOOL pickerIsShowing = NO;
     
     if (!pickerIsShowing)
     {
-        CGPoint newPickerCenter = CGPointMake(singlePicker.center.x, singlePicker.center.y - self.view.frame.size.height);
-        [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationDuration:0.5f];
-        [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
-        singlePicker.center = newPickerCenter;
-        [UIView commitAnimations];
-        pickerIsShowing = YES;
+        [self showPicker];
     }
     else if (pickerIsShowing)
     {
-        CGPoint newPickerCenter = CGPointMake(singlePicker.center.x, singlePicker.center.y + self.view.frame.size.height);
-        [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationDuration:0.5f];
-        [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
-        singlePicker.center = newPickerCenter;
-        [UIView commitAnimations];
-        pickerIsShowing = NO;
+        [self hidePicker];
     }
+}
+
+- (void)showPicker
+{
+    [singlePicker selectRow:speechCounter inComponent:0 animated:YES];
+    
+    CGPoint newPickerCenter = CGPointMake(singlePicker.center.x, singlePicker.center.y - self.view.frame.size.height);
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.5f];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+    singlePicker.center = newPickerCenter;
+    [UIView commitAnimations];
+    pickerIsShowing = YES;
+}
+- (void)hidePicker
+{
+    CGPoint newPickerCenter = CGPointMake(singlePicker.center.x, singlePicker.center.y + self.view.frame.size.height);
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.5f];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+    singlePicker.center = newPickerCenter;
+    [UIView commitAnimations];
+    pickerIsShowing = NO;
 }
 
 //Pick specific speech
@@ -418,13 +433,7 @@ BOOL pickerIsShowing = NO;
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    CGPoint newPickerCenter = CGPointMake(singlePicker.center.x, singlePicker.center.y + self.view.frame.size.height);
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:0.5f];
-    [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
-    singlePicker.center = newPickerCenter;
-    [UIView commitAnimations];
-    pickerIsShowing = NO;
+    [self hidePicker];
     
     [self pauseTimer];
     
