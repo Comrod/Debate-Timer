@@ -34,29 +34,27 @@ BOOL pickerIsShowing = NO;
     //Set up data storage
     storeData = [NSUserDefaults standardUserDefaults];
     
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isCenti"];
-    
-    [startTimerButton setTitle:@"Start Timer" forState:UIControlStateNormal];
-    
 
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"goneHome"])
     {
         //Resets variables if you have gone to the home screen
         speechCounter = 0;
-        [storeData setInteger:speechCounter forKey:@"speechCounter"];
         countdownTimeCentiseconds = 0;
-        [storeData setInteger:countdownTimeCentiseconds forKey:@"countdownTime"];
         alertShown = NO;
         timerStarted = NO;
         timerPaused = NO;
+        [self setDataToStorage];
+        [startTimerButton setTitle:@"Start Timer" forState:UIControlStateNormal];
+        
         
         NSLog(@"Reset debate round");
     }
     else
     {
-        countdownTimeCentiseconds = [storeData integerForKey:@"countdownTime"];
-        speechCounter = [storeData integerForKey:@"speechCounter"];
-        NSLog(@"Get data, Speechcounter: %i", speechCounter);
+        [self getDataFromStorage];
+        [startTimerButton setTitle:@"Resume Timer" forState:UIControlStateNormal];
+        timerStarted = YES;
+        timerPaused = YES;
     }
     
     
@@ -110,18 +108,64 @@ BOOL pickerIsShowing = NO;
         NSLog(@"PFD timing selected");
     }
     
+    [self setTimerLabelText];
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"goneHome"];
+}
+
+- (void)setTimerLabelText
+{
     //Determines if centiseconds are shown
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isCenti"])
     {
-        self.timerLabel.text = [NSString stringWithFormat:@"%02d:00:00", placeHolderMin];
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"goneHome"])
+        {
+            self.timerLabel.text = [NSString stringWithFormat:@"%02d:00:00", placeHolderMin];
+        }
+        else
+        {
+            self.timerLabel.text = [NSString stringWithFormat:@"%02d:%02d:%02d", minutes, seconds, centiseconds];
+        }
+        
         NSLog(@"Showing centiseconds");
     }
     else if (![[NSUserDefaults standardUserDefaults] boolForKey:@"isCenti"])
     {
-        self.timerLabel.text = [NSString stringWithFormat:@"%02d:00", placeHolderMin];
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"goneHome"])
+        {
+            self.timerLabel.text = [NSString stringWithFormat:@"%02d:00", placeHolderMin];
+        }
+        else
+        {
+            self.timerLabel.text = [NSString stringWithFormat:@"%02d:%02d", minutes, seconds];
+        }
+        
         NSLog(@"Not showing centiseconds");
     }
+}
+
+- (void)setDataToStorage
+{
+    [storeData setInteger:countdownTimeCentiseconds forKey:@"countdownTime"];
+    [storeData setInteger:minutes forKey:@"minutes"];
+    [storeData setInteger:seconds forKey:@"seconds"];
+    [storeData setInteger:centiseconds forKey:@"centiseconds"];
+    [storeData setInteger:speechCounter forKey:@"speechCounter"];
+    [storeData setInteger:placeHolderMin forKey:@"placeHolderMin"];
+    [storeData setInteger:styleChosen forKey:@"styleChosen"];
     
+    NSLog(@"Set data to storage");
+}
+- (void)getDataFromStorage
+{
+    countdownTimeCentiseconds = [storeData integerForKey:@"countdownTime"];
+    minutes = [storeData integerForKey:@"minutes"];
+    seconds = [storeData integerForKey:@"seconds"];
+    centiseconds = [storeData integerForKey:@"centiseconds"];
+    speechCounter = [storeData integerForKey:@"speechCounter"];
+    placeHolderMin = [storeData integerForKey:@"placeHolderMin"];
+    styleChosen = [storeData integerForKey:@"styleChosen"];
+    
+    NSLog(@"Got data from storage");
 }
 
 - (void)setDataForPolicy
@@ -155,8 +199,6 @@ BOOL pickerIsShowing = NO;
             [self timerRuns];
             
             [startTimerButton setTitle:@"Pause Timer" forState:UIControlStateNormal];
-            
-            timerStarted = YES;
         }
         else
         {
@@ -170,13 +212,13 @@ BOOL pickerIsShowing = NO;
         {
             //Pauses timer
             [self pauseTimer];
-            timerPaused = YES;
+            NSLog(@"Paused timer");
         }
         else if (timerPaused)
         {
             //Resumes timer
             [self resumeTimer];
-            timerPaused = NO;
+            NSLog(@"Resumed timer");
         }
     }
 }
@@ -184,9 +226,13 @@ BOOL pickerIsShowing = NO;
 //Runs the timer
 - (void)timerRuns
 {
+    if (timerStarted)
+    {
+        [self getDataFromStorage];
+    }
+    
     self.speechTimer = [NSTimer scheduledTimerWithTimeInterval:0.01f target:self selector:@selector(updateLabel:) userInfo:nil repeats:YES];
-    speechCounter ++;
-    [storeData setInteger:speechCounter forKey:@"speechCounter"];
+    timerStarted = YES;
     NSLog(@"Timer has started");
 }
 
@@ -200,21 +246,15 @@ BOOL pickerIsShowing = NO;
         seconds = (countdownTimeCentiseconds / 100) % 60;
         minutes = (countdownTimeCentiseconds / 100) / 60;
         
-        //Determines if centiseconds are shown
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isCenti"])
-        {
-            self.timerLabel.text = [NSString stringWithFormat:@"%02d:%02d:%02d", minutes, seconds, centiseconds];
-        }
-        else if (![[NSUserDefaults standardUserDefaults] boolForKey:@"isCenti"])
-        {
-            self.timerLabel.text = [NSString stringWithFormat:@"%02d:%02d", minutes, seconds];
-        }
+        [self setTimerLabelText];
         
-        [storeData setInteger:countdownTimeCentiseconds forKey:@"countdownTime"];
+        [self setDataToStorage];
         NSLog(@"Total countdown time: %i", countdownTimeCentiseconds);
     }
     else
     {
+        speechCounter ++;
+        
         //Shows alert that the speech is finished
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Timer done" message:@"Speech is finished" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
@@ -251,15 +291,17 @@ BOOL pickerIsShowing = NO;
 //Pauses timer
 - (void)pauseTimer
 {
-    [self.speechTimer setFireDate:[NSDate dateWithTimeIntervalSinceNow:31536000]];
+    [self.speechTimer invalidate];
     [startTimerButton setTitle:@"Resume Timer" forState:UIControlStateNormal];
+    timerPaused = YES;
 }
 
 //Resumes timer
 - (void)resumeTimer
 {
-    [self.speechTimer setFireDate:[NSDate date]];
+    [self timerRuns];
     [startTimerButton setTitle:@"Pause Timer" forState:UIControlStateNormal];
+    timerPaused = NO;
 }
 
 - (void)roundOver
@@ -383,6 +425,10 @@ BOOL pickerIsShowing = NO;
     singlePicker.center = newPickerCenter;
     [UIView commitAnimations];
     pickerIsShowing = NO;
+    
+    [self pauseTimer];
+    
+    [self setDataToStorage];
 }
 
 @end
