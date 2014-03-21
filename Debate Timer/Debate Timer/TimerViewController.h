@@ -30,6 +30,7 @@
 @property (nonatomic) NSTimer *speechTimer;
 @property (strong, nonatomic) IBOutlet UILabel *timerLabel;
 @property (strong, nonatomic) IBOutlet UIButton *startTimerButton;
+@property (strong, nonatomic) IBOutlet UIButton *resetTimerButton;
 
 //Switch
 @property (strong, nonatomic) IBOutlet UIButton *backButton;
@@ -47,5 +48,6 @@
 - (IBAction)showPickerButtonTap:(id)sender;
 - (IBAction)settingsButtonTap:(id)sender;
 - (IBAction)prepButtonTap:(id)sender;
+- (IBAction)resetTimerButtonTap:(id)sender;
 
 @end

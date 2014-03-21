@@ -14,11 +14,13 @@
 @property (strong, nonatomic) IBOutlet UILabel *yourPrepLabel;
 @property (strong, nonatomic) IBOutlet UIButton *yourPrepButton;
 @property (nonatomic) NSTimer *yourPrepTimer;
+@property (strong, nonatomic) IBOutlet UILabel *affNameLabel;
 
 //Their prep
 @property (strong, nonatomic) IBOutlet UILabel *theirPrepLabel;
 @property (strong, nonatomic) IBOutlet UIButton *theirPrepButton;
 @property (nonatomic) NSTimer *theirPrepTimer;
+@property (strong, nonatomic) IBOutlet UILabel *negNameLabel;
 
 @property (nonatomic) NSUserDefaults *storeData;
 

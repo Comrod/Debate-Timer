@@ -40,15 +40,7 @@ BOOL pickerIsShowing = NO;
     {
         //Resets variables if you have gone to the home screen
         speechCounter = 0;
-        countdownTimeCentiseconds = 0;
-        alertShown = NO;
-        timerStarted = NO;
-        timerPaused = NO;
-        [self setDataToStorage];
-        [startTimerButton setTitle:@"Start Timer" forState:UIControlStateNormal];
-        
-        
-        NSLog(@"Reset debate round");
+        [self resetTimer];
     }
     else
     {
@@ -73,6 +65,14 @@ BOOL pickerIsShowing = NO;
 
     singlePicker.center = CGPointMake(singlePicker.center.x, singlePicker.center.y + self.view.frame.size.height);
     
+    [self getStyleandSetData];
+    
+    [self setTimerLabelText];
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"goneHome"];
+}
+
+- (void)getStyleandSetData
+{
     styleChosen = [storeData integerForKey:@"styleKey"];
     
     if (styleChosen == 1)
@@ -108,9 +108,6 @@ BOOL pickerIsShowing = NO;
         self.styleLabel.text = [NSString stringWithFormat:@"Public Forum"];
         NSLog(@"PFD timing selected");
     }
-    
-    [self setTimerLabelText];
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"goneHome"];
 }
 
 - (void)setTimerLabelText
@@ -308,6 +305,38 @@ BOOL pickerIsShowing = NO;
     timerPaused = NO;
 }
 
+- (void)resetTimer
+{
+    [self.speechTimer invalidate];
+    countdownTimeCentiseconds = 0;
+    minutes = 0;
+    seconds = 0;
+    centiseconds = 0;
+    alertShown = NO;
+    timerStarted = NO;
+    timerPaused = NO;
+    timerFinished = YES;
+    [self setDataToStorage];
+    
+    if (styleChosen == 1)
+    {
+        [self setDataForPolicy];
+    }
+    else if (styleChosen == 2)
+    {
+        [self setDataForLD];
+    }
+    else if (styleChosen == 3)
+    {
+        [self setDataForPFD];
+    }
+    
+    [self setTimerLabelText];
+    
+    [startTimerButton setTitle:@"Start Timer" forState:UIControlStateNormal];
+    NSLog(@"Reset timer");
+}
+
 - (void)roundOver
 {
     UIAlertView *roundOverAlert = [[UIAlertView alloc] initWithTitle:@"Round is Over" message:@"Round is over, you've been sent back to the selection screen" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -336,6 +365,11 @@ BOOL pickerIsShowing = NO;
 - (IBAction)prepButtonTap:(id)sender
 {
 
+}
+
+- (IBAction)resetTimerButtonTap:(id)sender
+{
+    [self resetTimer];
 }
 
 - (IBAction)showPickerButtonTap:(id)sender

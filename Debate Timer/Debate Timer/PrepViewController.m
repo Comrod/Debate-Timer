@@ -15,7 +15,7 @@
 
 @implementation PrepViewController
 
-@synthesize yourPrepButton, theirPrepButton, yourPrepLabel, theirPrepLabel, yourPrepTimer, theirPrepTimer, storeData;
+@synthesize yourPrepButton, theirPrepButton, yourPrepLabel, theirPrepLabel, yourPrepTimer, theirPrepTimer, storeData, affNameLabel, negNameLabel;
 
 BOOL isYourPrepStarted = NO;
 BOOL isYourPrepPaused = NO;
@@ -35,6 +35,8 @@ int theirCentiseconds;
 int theirSeconds;
 int theirMinutes;
 
+int styleChosen = 0;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -50,6 +52,8 @@ int theirMinutes;
     // Do any additional setup after loading the view.
     
     storeData = [NSUserDefaults standardUserDefaults];
+    
+    styleChosen = [storeData integerForKey:@"styleKey"];
     
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"goneHome"])
     {
@@ -107,6 +111,17 @@ int theirMinutes;
         self.yourPrepLabel.text = [NSString stringWithFormat:@"%02d:%02d", yourMinutes, yourSeconds];
         self.theirPrepLabel.text = [NSString stringWithFormat:@"%02d:%02d", theirMinutes, theirSeconds];
         NSLog(@"Not showing centiseconds");
+    }
+    
+    if (styleChosen == 1 || styleChosen == 2)
+    {
+        affNameLabel.text = @"Aff Prep Time";
+        negNameLabel.text = @"Neg Prep Time";
+    }
+    else if (styleChosen == 3)
+    {
+        affNameLabel.text = @"Pro Prep Time";
+        negNameLabel.text = @"Con Prep Time";
     }
 }
 

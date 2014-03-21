@@ -131,13 +131,13 @@
                                     <segue destination="aJM-md-uNF" kind="modal" modalTransitionStyle="crossDissolve" id="Wrz-D2-6Sm"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Prep Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ceJ-lk-JU3">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Aff Prep Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ceJ-lk-JU3">
                                 <rect key="frame" x="75" y="128" width="173" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Their Prep Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vRz-mX-IZs">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Neg Prep Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vRz-mX-IZs">
                                 <rect key="frame" x="70" y="279" width="181" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
@@ -169,6 +169,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="affNameLabel" destination="ceJ-lk-JU3" id="Gwr-cL-CG1"/>
+                        <outlet property="negNameLabel" destination="vRz-mX-IZs" id="mbx-fL-Q1C"/>
                         <outlet property="theirPrepButton" destination="JhZ-DD-knu" id="pfD-WR-fxL"/>
                         <outlet property="theirPrepLabel" destination="458-n2-FPl" id="7d9-Yu-uem"/>
                         <outlet property="yourPrepButton" destination="MBy-ab-W2H" id="mga-v2-ebZ"/>
@@ -300,7 +302,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ysg-UC-x40">
-                                <rect key="frame" x="200" y="431" width="100" height="29"/>
+                                <rect key="frame" x="208" y="431" width="92" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <state key="normal" title="Settings">
@@ -323,6 +325,17 @@
                                     <segue destination="zK7-dp-j8U" kind="modal" modalTransitionStyle="crossDissolve" id="Tbm-b3-b5O"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="H30-Kw-7gj">
+                                <rect key="frame" x="234" y="396" width="66" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <state key="normal" title="Reset">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="resetTimerButtonTap:" destination="aJM-md-uNF" eventType="touchUpInside" id="qwC-mb-EXL"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -331,6 +344,7 @@
                     <connections>
                         <outlet property="backButton" destination="g4p-iK-2ER" id="2f4-uO-7ZT"/>
                         <outlet property="prepButton" destination="qoL-qW-PgS" id="7Im-57-aOX"/>
+                        <outlet property="resetTimerButton" destination="H30-Kw-7gj" id="T9A-9A-zN5"/>
                         <outlet property="settingsButton" destination="ysg-UC-x40" id="GRb-BA-q7I"/>
                         <outlet property="showPickerButton" destination="V0m-JS-8dS" id="VVC-x1-X9u"/>
                         <outlet property="singlePicker" destination="5ju-tZ-u9l" id="Yu6-gd-8cL"/>
