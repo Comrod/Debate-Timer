@@ -60,7 +60,7 @@ BOOL pickerIsShowing = NO;
     
     
     //Policy Arrays
-    policyTimes = [NSArray arrayWithObjects: @8, @3, @8, @3, @8, @3, @8, @3, @5, @5, @5, @5, @0, nil];
+    policyTimes = [NSArray arrayWithObjects: @1, @3, @8, @3, @8, @3, @8, @3, @5, @5, @5, @5, @0, nil];
     policySpeeches = [NSArray arrayWithObjects:@"1AC", @"1st CX", @"1NC", @"2nd CX", @"2AC", @"3rd CX", @"2NC", @"4th CX", @"1NR", @"1AR", @"2NR", @"2AR", @"Round Finished", nil];
     
     //Lincoln-Douglas Arrays
@@ -353,8 +353,10 @@ BOOL pickerIsShowing = NO;
 
 - (void)showPicker
 {
+    //Sets picker to selected row
     [singlePicker selectRow:speechCounter inComponent:0 animated:YES];
     
+    //Animates picker
     CGPoint newPickerCenter = CGPointMake(singlePicker.center.x, singlePicker.center.y - self.view.frame.size.height);
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.5f];
@@ -365,6 +367,7 @@ BOOL pickerIsShowing = NO;
 }
 - (void)hidePicker
 {
+    //Animates picker
     CGPoint newPickerCenter = CGPointMake(singlePicker.center.x, singlePicker.center.y + self.view.frame.size.height);
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.5f];
