@@ -19,7 +19,7 @@
 
 int minutes, seconds, centiseconds, countdownTimeCentiseconds;
 int placeHolderMin;
-int speechCounter;
+int speechCounter = 0;
 int styleChosen;
 BOOL alertShown = NO;
 BOOL timerStarted = NO;
@@ -38,11 +38,27 @@ BOOL pickerIsShowing = NO;
     
     [startTimerButton setTitle:@"Start Timer" forState:UIControlStateNormal];
     
-    //Set preliminary variables
-    speechCounter = 0;
-    alertShown = NO;
-    timerStarted = NO;
-    timerPaused = NO;
+
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"goneHome"])
+    {
+        //Resets variables if you have gone to the home screen
+        speechCounter = 0;
+        [storeData setInteger:speechCounter forKey:@"speechCounter"];
+        countdownTimeCentiseconds = 0;
+        [storeData setInteger:countdownTimeCentiseconds forKey:@"countdownTime"];
+        alertShown = NO;
+        timerStarted = NO;
+        timerPaused = NO;
+        
+        NSLog(@"Reset debate round");
+    }
+    else
+    {
+        countdownTimeCentiseconds = [storeData integerForKey:@"countdownTime"];
+        speechCounter = [storeData integerForKey:@"speechCounter"];
+        NSLog(@"Get data, Speechcounter: %i", speechCounter);
+    }
+    
     
     //Policy Arrays
     policyTimes = [NSArray arrayWithObjects: @1, @3, @8, @3, @8, @3, @8, @3, @5, @5, @5, @5, @0, nil];
@@ -59,7 +75,6 @@ BOOL pickerIsShowing = NO;
     singlePicker.center = CGPointMake(singlePicker.center.x, singlePicker.center.y + self.view.frame.size.height);
     
     styleChosen = [storeData integerForKey:@"styleKey"];
-    NSLog(@"Style of debate: %i", styleChosen);
     
     if (styleChosen == 1)
     {
@@ -171,6 +186,7 @@ BOOL pickerIsShowing = NO;
 {
     self.speechTimer = [NSTimer scheduledTimerWithTimeInterval:0.01f target:self selector:@selector(updateLabel:) userInfo:nil repeats:YES];
     speechCounter ++;
+    [storeData setInteger:speechCounter forKey:@"speechCounter"];
     NSLog(@"Timer has started");
 }
 
@@ -193,12 +209,12 @@ BOOL pickerIsShowing = NO;
         {
             self.timerLabel.text = [NSString stringWithFormat:@"%02d:%02d", minutes, seconds];
         }
-            
+        
+        [storeData setInteger:countdownTimeCentiseconds forKey:@"countdownTime"];
         NSLog(@"Total countdown time: %i", countdownTimeCentiseconds);
     }
     else
     {
-        
         //Shows alert that the speech is finished
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Timer done" message:@"Speech is finished" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
@@ -318,6 +334,7 @@ BOOL pickerIsShowing = NO;
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     speechCounter = row;
+    [storeData setInteger:speechCounter forKey:@"speechCounter"];
     
     if (styleChosen == 1)
     {
@@ -351,6 +368,21 @@ BOOL pickerIsShowing = NO;
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Navigation
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+    CGPoint newPickerCenter = CGPointMake(singlePicker.center.x, singlePicker.center.y + self.view.frame.size.height);
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.5f];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+    singlePicker.center = newPickerCenter;
+    [UIView commitAnimations];
+    pickerIsShowing = NO;
 }
 
 @end
