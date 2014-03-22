@@ -14,5 +14,6 @@
 
 
 - (IBAction)centisecondValueChanged:(id)sender;
+- (IBAction)backButtonTap:(id)sender;
 
 @end

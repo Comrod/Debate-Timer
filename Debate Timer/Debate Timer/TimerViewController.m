@@ -291,7 +291,7 @@ BOOL pickerIsShowing = NO;
         [startTimerButton setTitle:@"Start Timer" forState:UIControlStateNormal];
         
         //Stops timer
-        [self.speechTimer invalidate];
+        [self killTimer];
     }
 }
 
@@ -299,7 +299,7 @@ BOOL pickerIsShowing = NO;
 //Pauses timer
 - (void)pauseTimer
 {
-    [self.speechTimer invalidate];
+    [self killTimer];
     [startTimerButton setTitle:@"Resume Timer" forState:UIControlStateNormal];
     timerPaused = YES;
 }
@@ -312,7 +312,7 @@ BOOL pickerIsShowing = NO;
 }
 - (void)resetTimer
 {
-    [self.speechTimer invalidate];
+    [self killTimer];
     countdownTimeCentiseconds = 0;
     minutes = 0;
     seconds = 0;
@@ -341,6 +341,13 @@ BOOL pickerIsShowing = NO;
     [startTimerButton setTitle:@"Start Timer" forState:UIControlStateNormal];
     NSLog(@"Reset timer");
 }
+- (void)killTimer
+{
+    while ([self.speechTimer isValid])
+    {
+        [self.speechTimer invalidate];
+    }
+}
 - (void)roundOver
 {
     UIAlertView *roundOverAlert = [[UIAlertView alloc] initWithTitle:@"Round is Over" message:@"Round is over, you've been sent back to the selection screen" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -353,19 +360,18 @@ BOOL pickerIsShowing = NO;
 - (IBAction)backButtonTap:(id)sender
 {
     //Stops timer
-    [self.speechTimer invalidate];
+    [self killTimer];
     
     //Changes view controller back to main view
-    ViewController *vC = [self.storyboard instantiateViewControllerWithIdentifier:@"viewController"];
-    [self presentViewController:vC animated:YES completion:nil];
+    [self performSegueWithIdentifier:@"segueToHome" sender:self];
 }
 - (IBAction)settingsButtonTap:(id)sender
 {
-
+    [self performSegueWithIdentifier:@"segueToSettings" sender:self];
 }
 - (IBAction)prepButtonTap:(id)sender
 {
-
+    [self performSegueWithIdentifier:@"segueToPrep" sender:self];
 }
 - (IBAction)resetTimerButtonTap:(id)sender
 {
@@ -445,7 +451,7 @@ BOOL pickerIsShowing = NO;
     }
     
     timerStarted = NO;
-    [self.speechTimer invalidate];
+    [self killTimer];
     
     [startTimerButton setTitle:@"Start Timer" forState:UIControlStateNormal];
     

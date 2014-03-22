@@ -210,8 +210,6 @@ int styleChosen = 0;
 }
 
 
-
-
  #pragma mark - Their Prep Time
 //Runs their timer
 - (void)runTheirTimer
@@ -294,6 +292,11 @@ int styleChosen = 0;
 {
     [self.theirPrepTimer invalidate];
     [self resetTheirPrep];
+}
+
+- (IBAction)backButtonTap:(id)sender
+{
+    [self performSegueWithIdentifier:@"segueFromPrep" sender:self];
 }
 
 - (void)didReceiveMemoryWarning

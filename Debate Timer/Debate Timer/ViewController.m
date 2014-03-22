@@ -38,8 +38,10 @@
     self.whatStyle = 1;
     [storeData setInteger:self.whatStyle forKey:@"styleKey"];
     
-    TimerViewController *timerVC = [self.storyboard instantiateViewControllerWithIdentifier:@"timerViewController"];
-    [self presentViewController:timerVC animated:YES completion:nil];
+    [self performSegueWithIdentifier:@"segueToTimer" sender:self];
+    
+    //TimerViewController *timerVC = [self.storyboard instantiateViewControllerWithIdentifier:@"timerViewController"];
+    //[self presentViewController:timerVC animated:YES completion:nil];
 }
 
 - (IBAction)tapLDButton:(id)sender
@@ -47,8 +49,10 @@
     self.whatStyle = 2;
     [storeData setInteger:self.whatStyle forKey:@"styleKey"];
     
-    TimerViewController *timerVC = [self.storyboard instantiateViewControllerWithIdentifier:@"timerViewController"];
-    [self presentViewController:timerVC animated:YES completion:nil];
+    [self performSegueWithIdentifier:@"segueToTimer" sender:self];
+    
+    //TimerViewController *timerVC = [self.storyboard instantiateViewControllerWithIdentifier:@"timerViewController"];
+    //[self presentViewController:timerVC animated:YES completion:nil];
 }
 
 - (IBAction)tapPFButton:(id)sender
@@ -56,7 +60,9 @@
     self.whatStyle = 3;
     [storeData setInteger:self.whatStyle forKey:@"styleKey"];
     
-    TimerViewController *timerVC = [self.storyboard instantiateViewControllerWithIdentifier:@"timerViewController"];
-    [self presentViewController:timerVC animated:YES completion:nil];
+    [self performSegueWithIdentifier:@"segueToTimer" sender:self];
+    
+    //TimerViewController *timerVC = [self.storyboard instantiateViewControllerWithIdentifier:@"timerViewController"];
+    //[self presentViewController:timerVC animated:YES completion:nil];
 }
 @end

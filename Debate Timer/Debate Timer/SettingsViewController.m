@@ -66,4 +66,10 @@
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isCenti"];
     }
 }
+
+- (IBAction)backButtonTap:(id)sender
+{
+    [self performSegueWithIdentifier:@"segueFromSettings" sender:self];
+}
+
 @end
