@@ -8,10 +8,12 @@
 
 #import "ViewController.h"
 #import "SettingsViewController.h"
+#include <AudioToolbox/AudioToolbox.h>
 
-@interface TimerViewController : UIViewController <UIPickerViewDataSource , UIPickerViewDelegate>
+@interface TimerViewController : UIViewController <UIPickerViewDataSource , UIPickerViewDelegate, UIAlertViewDelegate>
 {
     IBOutlet UIPickerView *speechPicker;
+    SystemSoundID soundID;
 }
 
 //Speeches and times
@@ -41,6 +43,9 @@
 @property (strong, nonatomic) IBOutlet UIButton *showPickerButton;
 @property (nonatomic) NSArray *pickerData;
 @property(nonatomic, retain) UIPickerView *speechPicker;
+
+//Alert
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;
 
 
 - (IBAction)startTimerButtonTap:(id)sender;

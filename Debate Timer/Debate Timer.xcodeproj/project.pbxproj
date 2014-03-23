@@ -24,6 +24,7 @@
 		248167BC18D937F100222A3B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 248167BA18D937F100222A3B /* InfoPlist.strings */; };
 		248167BE18D937F100222A3B /* Debate_TimerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 248167BD18D937F100222A3B /* Debate_TimerTests.m */; };
 		248167C918D93A8900222A3B /* TimerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 248167C818D93A8900222A3B /* TimerViewController.m */; };
+		24A78EB018DF40C200A885D0 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24A78EAF18DF40C200A885D0 /* AudioToolbox.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 		248167BD18D937F100222A3B /* Debate_TimerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Debate_TimerTests.m; sourceTree = "<group>"; };
 		248167C718D93A8900222A3B /* TimerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerViewController.h; sourceTree = "<group>"; };
 		248167C818D93A8900222A3B /* TimerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimerViewController.m; sourceTree = "<group>"; };
+		24A78EAF18DF40C200A885D0 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24A78EB018DF40C200A885D0 /* AudioToolbox.framework in Frameworks */,
 				2481679518D937F100222A3B /* CoreGraphics.framework in Frameworks */,
 				2481679718D937F100222A3B /* UIKit.framework in Frameworks */,
 				2481679318D937F100222A3B /* Foundation.framework in Frameworks */,
@@ -110,6 +113,7 @@
 		2481679118D937F100222A3B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				24A78EAF18DF40C200A885D0 /* AudioToolbox.framework */,
 				2481679218D937F100222A3B /* Foundation.framework */,
 				2481679418D937F100222A3B /* CoreGraphics.framework */,
 				2481679618D937F100222A3B /* UIKit.framework */,

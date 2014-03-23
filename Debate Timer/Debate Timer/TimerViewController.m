@@ -261,8 +261,20 @@ BOOL pickerIsShowing = NO;
         timerFinished = YES;
         
         //Shows alert that the speech is finished
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Timer done" message:@"Speech is finished" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Timer done" message:@"Speech is finished" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
+        
+        //Sound
+        CFBundleRef mainBundle = CFBundleGetMainBundle();
+        CFURLRef soundURL;
+        
+        soundURL = CFBundleCopyResourceURL(mainBundle, CFSTR("Tock"), CFSTR("aiff"), NULL);
+        
+        //NSString *path = [[NSBundle mainBundle] pathForResource:@"Beep" ofType:@"aiff"];
+        //NSURL *soundURL = [NSURL fileURLWithPath:path];
+        AudioServicesCreateSystemSoundID(soundURL, &soundID);
+        AudioServicesPlaySystemSound(soundID);
+        NSLog(@"Played system sound");
         
         speechCounter ++;
         
@@ -293,6 +305,15 @@ BOOL pickerIsShowing = NO;
         //Stops timer
         [self killTimer];
     }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex==0) {
+        AudioServicesDisposeSystemSoundID(soundID);
+        
+    }
+    NSLog(@"Alert has been dismissed");
 }
 
 #pragma - Modify Timer Code
