@@ -53,7 +53,7 @@ int styleChosen = 0;
     
     storeData = [NSUserDefaults standardUserDefaults];
     
-    styleChosen = [storeData integerForKey:@"styleKey"];
+    styleChosen = (int)[storeData integerForKey:@"styleKey"];
     
     
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"goneHome"])
@@ -65,12 +65,12 @@ int styleChosen = 0;
     else
     {
         //Your prep time
-        yourCountUpCentiseconds = [storeData integerForKey:@"yourCentiseconds"];
+        yourCountUpCentiseconds = (int)[storeData integerForKey:@"yourCentiseconds"];
         isYourPrepStarted = YES;
         isYourPrepPaused = YES;
         
         //Their prep time
-        theirCountUpCentiseconds = [storeData integerForKey:@"theirCentiseconds"];
+        theirCountUpCentiseconds = (int)[storeData integerForKey:@"theirCentiseconds"];
         isTheirPrepStarted = YES;
         isTheirPrepPaused = YES;
         

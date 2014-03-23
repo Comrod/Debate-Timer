@@ -84,7 +84,7 @@ BOOL pickerIsShowing = NO;
 #pragma mark - Getters and Setters
 - (void)getStyleandSetData
 {
-    styleChosen = [storeData integerForKey:@"styleKey"];
+    styleChosen = (int)[storeData integerForKey:@"styleKey"];
     
     if (styleChosen == 1)
     {
@@ -134,8 +134,6 @@ BOOL pickerIsShowing = NO;
         {
             self.timerLabel.text = [NSString stringWithFormat:@"%02d:%02d:%02d", minutes, seconds, centiseconds];
         }
-        
-        NSLog(@"Showing centiseconds");
     }
     else if (![[NSUserDefaults standardUserDefaults] boolForKey:@"isCenti"])
     {
@@ -147,8 +145,6 @@ BOOL pickerIsShowing = NO;
         {
             self.timerLabel.text = [NSString stringWithFormat:@"%02d:%02d", minutes, seconds];
         }
-        
-        NSLog(@"Not showing centiseconds");
     }
 }
 - (void)setDataToStorage
@@ -160,20 +156,16 @@ BOOL pickerIsShowing = NO;
     [storeData setInteger:speechCounter forKey:@"speechCounter"];
     [storeData setInteger:placeHolderMin forKey:@"placeHolderMin"];
     [storeData setInteger:styleChosen forKey:@"styleChosen"];
-    
-    NSLog(@"Set data to storage");
 }
 - (void)getDataFromStorage
 {
-    countdownTimeCentiseconds = [storeData integerForKey:@"countdownTime"];
-    minutes = [storeData integerForKey:@"minutes"];
-    seconds = [storeData integerForKey:@"seconds"];
-    centiseconds = [storeData integerForKey:@"centiseconds"];
-    speechCounter = [storeData integerForKey:@"speechCounter"];
-    placeHolderMin = [storeData integerForKey:@"placeHolderMin"];
-    styleChosen = [storeData integerForKey:@"styleChosen"];
-    
-    NSLog(@"Got data from storage");
+    countdownTimeCentiseconds = (int)[storeData integerForKey:@"countdownTime"];
+    minutes = (int)[storeData integerForKey:@"minutes"];
+    seconds = (int)[storeData integerForKey:@"seconds"];
+    centiseconds = (int)[storeData integerForKey:@"centiseconds"];
+    speechCounter = (int)[storeData integerForKey:@"speechCounter"];
+    placeHolderMin = (int)[storeData integerForKey:@"placeHolderMin"];
+    styleChosen = (int)[storeData integerForKey:@"styleChosen"];
 }
 - (void)setDataForPolicy
 {
@@ -235,11 +227,14 @@ BOOL pickerIsShowing = NO;
     {
         [self getDataFromStorage];
     }
+    else
+    {
+        NSLog(@"Started timer");
+    }
     
     self.speechTimer = [NSTimer scheduledTimerWithTimeInterval:0.01f target:self selector:@selector(updateLabel:) userInfo:nil repeats:YES];
     timerStarted = YES;
     timerFinished = NO;
-    NSLog(@"Timer has started");
 }
 //Effectively the timer
 - (void)updateLabel:(NSTimer *)timer
@@ -374,8 +369,7 @@ BOOL pickerIsShowing = NO;
     UIAlertView *roundOverAlert = [[UIAlertView alloc] initWithTitle:@"Round is Over" message:@"Round is over, you've been sent back to the selection screen" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [roundOverAlert show];
     
-    ViewController *vC = [self.storyboard instantiateViewControllerWithIdentifier:@"viewController"];
-    [self presentViewController:vC animated:YES completion:nil];
+    [self performSegueWithIdentifier:@"segueToHome" sender:self];
 }
 //Back button tap
 - (IBAction)backButtonTap:(id)sender
@@ -455,7 +449,7 @@ BOOL pickerIsShowing = NO;
 }
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    speechCounter = row;
+    speechCounter = (int)row;
     [storeData setInteger:speechCounter forKey:@"speechCounter"];
     
     if (styleChosen == 1)
