@@ -89,16 +89,9 @@ int styleChosen = 0;
     theirSeconds = (theirCountUpCentiseconds / 100) % 60;
     theirMinutes = (theirCountUpCentiseconds / 100) / 60;
     
-    if (yourCountUpCentiseconds != 0)
-    {
-        [yourPrepButton setTitle:@"Resume" forState:UIControlStateNormal];
-        [theirPrepButton setTitle:@"Resume" forState:UIControlStateNormal];
-    }
-    else
-    {
-        [yourPrepButton setTitle:@"Start" forState:UIControlStateNormal];
-        [theirPrepButton setTitle:@"Start" forState:UIControlStateNormal];
-    }
+    //Set prep button titles
+    [self setYourButton];
+    [self setTheirButton];
     
     //Determines if centiseconds are shown
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isCenti"])
@@ -154,6 +147,17 @@ int styleChosen = 0;
     else if (![[NSUserDefaults standardUserDefaults] boolForKey:@"isCenti"])
     {
         self.yourPrepLabel.text = [NSString stringWithFormat:@"%02d:%02d", yourMinutes, yourSeconds];
+    }
+}
+- (void)setYourButton
+{
+    if (yourCountUpCentiseconds > 0)
+    {
+        [yourPrepButton setTitle:@"Resume" forState:UIControlStateNormal];
+    }
+    else
+    {
+        [yourPrepButton setTitle:@"Start" forState:UIControlStateNormal];
     }
 }
 - (IBAction)yourPrepButtonTap:(id)sender
@@ -239,6 +243,17 @@ int styleChosen = 0;
     else if (![[NSUserDefaults standardUserDefaults] boolForKey:@"isCenti"])
     {
         self.theirPrepLabel.text = [NSString stringWithFormat:@"%02d:%02d", theirMinutes, theirSeconds];
+    }
+}
+- (void)setTheirButton
+{
+    if (theirCountUpCentiseconds > 0)
+    {
+        [theirPrepButton setTitle:@"Resume" forState:UIControlStateNormal];
+    }
+    else
+    {
+        [theirPrepButton setTitle:@"Start" forState:UIControlStateNormal];
     }
 }
 - (IBAction)theirPrepButtonTap:(id)sender
