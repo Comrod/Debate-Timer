@@ -13,7 +13,6 @@
 @interface TimerViewController : UIViewController <UIPickerViewDataSource , UIPickerViewDelegate, UIAlertViewDelegate>
 {
     IBOutlet UIPickerView *speechPicker;
-    SystemSoundID soundID;
 }
 
 //Speeches and times
