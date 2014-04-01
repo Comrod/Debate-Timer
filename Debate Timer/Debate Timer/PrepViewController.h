@@ -28,6 +28,8 @@
 - (IBAction)yourPrepButtonTap:(id)sender;
 - (IBAction)theirPrepButtonTap:(id)sender;
 - (IBAction)resetYourPrepTap:(id)sender;
+- (void)resetYourPrep;
+- (void)resetTheirPrep;
 - (IBAction)resetTheirPrepTap:(id)sender;
 - (IBAction)backButtonTap:(id)sender;
 

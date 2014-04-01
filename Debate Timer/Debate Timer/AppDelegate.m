@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "TimerViewController.h"
+#import "PrepViewController.h"
 
 @implementation AppDelegate
 
@@ -42,6 +42,10 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    PrepViewController *prepVC = [PrepViewController new];
+    [prepVC resetYourPrep];
+    [prepVC resetTheirPrep];
+    NSLog(@"App terminated");
 }
 
 @end

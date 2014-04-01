@@ -77,8 +77,6 @@ int styleChosen = 0;
         NSLog(@"Using old timing data");
     }
     
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"goneHome"];
-    
     //Convert your centiseconds
     yourCentiseconds = yourCountUpCentiseconds % 100;
     yourSeconds = (yourCountUpCentiseconds / 100) % 60;
@@ -117,6 +115,8 @@ int styleChosen = 0;
         affNameLabel.text = @"Pro Prep Time";
         negNameLabel.text = @"Con Prep Time";
     }
+    
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"goneHome"];
 }
 
  #pragma mark - Your Prep Time
@@ -211,6 +211,7 @@ int styleChosen = 0;
 {
     [self.yourPrepTimer invalidate];
     [self resetYourPrep];
+    NSLog(@"stuff");
 }
 
 
