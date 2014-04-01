@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "TimerViewController.h"
+#import "PrepViewController.h"
 
 @interface ViewController ()
 
@@ -25,6 +26,7 @@
     storeData = [NSUserDefaults standardUserDefaults];
     
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"goneHome"];
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"shouldResetPrep"];
 }
 
 - (void)didReceiveMemoryWarning

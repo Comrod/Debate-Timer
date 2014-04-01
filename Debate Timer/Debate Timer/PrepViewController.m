@@ -56,11 +56,12 @@ int styleChosen = 0;
     styleChosen = (int)[storeData integerForKey:@"styleKey"];
     
     
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"goneHome"])
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"shouldResetPrep"])
     {
         //Resets prep time if you have gone to the home screen
         [self resetYourPrep];
         [self resetTheirPrep];
+        NSLog(@"New prep times");
     }
     else
     {
@@ -74,7 +75,7 @@ int styleChosen = 0;
         isTheirPrepStarted = YES;
         isTheirPrepPaused = YES;
         
-        NSLog(@"Using old timing data");
+        NSLog(@"Using old prep time");
     }
     
     //Convert your centiseconds
@@ -116,7 +117,7 @@ int styleChosen = 0;
         negNameLabel.text = @"Con Prep Time";
     }
     
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"goneHome"];
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"shouldResetPrep"];
 }
 
  #pragma mark - Your Prep Time
@@ -135,7 +136,6 @@ int styleChosen = 0;
     [self setYourLabel];
 
     [storeData setInteger:yourCountUpCentiseconds forKey:@"yourCentiseconds"];
-    //NSLog(@"Your total prep time in centiseconds: %i", yourCountUpCentiseconds);
 }
 - (void)setYourLabel
 {
@@ -196,6 +196,7 @@ int styleChosen = 0;
 }
 - (void)resetYourPrep
 {
+    [self.yourPrepTimer invalidate];
     yourCountUpCentiseconds = 0;
     [storeData setInteger:yourCountUpCentiseconds forKey:@"yourCentiseconds"];
     isYourPrepStarted = NO;
@@ -205,13 +206,11 @@ int styleChosen = 0;
     yourCentiseconds = 0;
     [self setYourLabel];
     [yourPrepButton setTitle:@"Start" forState:UIControlStateNormal];
-    NSLog(@"Resetting your prep time");
 }
 - (IBAction)resetYourPrepTap:(id)sender
 {
-    [self.yourPrepTimer invalidate];
     [self resetYourPrep];
-    NSLog(@"stuff");
+    NSLog(@"Reset your prep");
 }
 
 
@@ -293,6 +292,7 @@ int styleChosen = 0;
 }
 - (void)resetTheirPrep
 {
+    [self.theirPrepTimer invalidate];
     theirCountUpCentiseconds = 0;
     [storeData setInteger:theirCountUpCentiseconds forKey:@"theirCentiseconds"];
     isTheirPrepStarted = NO;
@@ -302,12 +302,11 @@ int styleChosen = 0;
     theirCentiseconds = 0;
     [self setTheirLabel];
     [theirPrepButton setTitle:@"Start" forState:UIControlStateNormal];
-    NSLog(@"Resetting their prep time");
 }
 - (IBAction)resetTheirPrepTap:(id)sender
 {
-    [self.theirPrepTimer invalidate];
     [self resetTheirPrep];
+    NSLog(@"Reset their prep");
 }
 
 - (IBAction)backButtonTap:(id)sender
