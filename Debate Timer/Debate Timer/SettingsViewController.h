@@ -9,11 +9,20 @@
 #import <UIKit/UIKit.h>
 
 @interface SettingsViewController : UIViewController
+{
+    int prepValue;
+}
+
 
 @property (strong, nonatomic) IBOutlet UISegmentedControl *centisecondSegControl;
+@property (strong, nonatomic) IBOutlet UILabel *prepTimeLabel;
+@property (nonatomic) NSUserDefaults *storeData;
+@property (strong, nonatomic) IBOutlet UIStepper *prepStepper;
 
 
 - (IBAction)centisecondValueChanged:(id)sender;
 - (IBAction)backButtonTap:(id)sender;
+- (IBAction)prepStepperValueChanged:(id)sender;
+
 
 @end
