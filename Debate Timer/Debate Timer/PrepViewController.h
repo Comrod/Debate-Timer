@@ -9,6 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface PrepViewController : UIViewController
+{
+    int prepValue;
+}
+
 
 //Your prep
 @property (strong, nonatomic) IBOutlet UILabel *yourPrepLabel;

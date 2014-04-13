@@ -24,13 +24,13 @@ BOOL isTheirPrepStarted = NO;
 BOOL isTheirPrepPaused = NO;
 
 //Your prep
-int yourCountUpCentiseconds = 0;
+int yourPrepCentiseconds = 0;
 int yourCentiseconds;
 int yourSeconds;
 int yourMinutes;
 
 //Their prep
-int theirCountUpCentiseconds = 0;
+int theirPrepCentiseconds = 0;
 int theirCentiseconds;
 int theirSeconds;
 int theirMinutes;
@@ -61,17 +61,18 @@ int styleChosen = 0;
         //Resets prep time if you have gone to the home screen
         [self resetYourPrep];
         [self resetTheirPrep];
+        
         NSLog(@"New prep times");
     }
     else
     {
         //Your prep time
-        yourCountUpCentiseconds = (int)[storeData integerForKey:@"yourCentiseconds"];
+        yourPrepCentiseconds = (int)[storeData integerForKey:@"yourCentiseconds"];
         isYourPrepStarted = YES;
         isYourPrepPaused = YES;
         
         //Their prep time
-        theirCountUpCentiseconds = (int)[storeData integerForKey:@"theirCentiseconds"];
+        theirPrepCentiseconds = (int)[storeData integerForKey:@"theirCentiseconds"];
         isTheirPrepStarted = YES;
         isTheirPrepPaused = YES;
         
@@ -79,14 +80,14 @@ int styleChosen = 0;
     }
     
     //Convert your centiseconds
-    yourCentiseconds = yourCountUpCentiseconds % 100;
-    yourSeconds = (yourCountUpCentiseconds / 100) % 60;
-    yourMinutes = (yourCountUpCentiseconds / 100) / 60;
+    yourCentiseconds = yourPrepCentiseconds % 100;
+    yourSeconds = (yourPrepCentiseconds / 100) % 60;
+    yourMinutes = (yourPrepCentiseconds / 100) / 60;
     
     //Convert their centiseconds
-    theirCentiseconds = theirCountUpCentiseconds % 100;
-    theirSeconds = (theirCountUpCentiseconds / 100) % 60;
-    theirMinutes = (theirCountUpCentiseconds / 100) / 60;
+    theirCentiseconds = theirPrepCentiseconds % 100;
+    theirSeconds = (theirPrepCentiseconds / 100) % 60;
+    theirMinutes = (theirPrepCentiseconds / 100) / 60;
     
     //Set prep button titles
     [self setYourButton];
@@ -127,15 +128,23 @@ int styleChosen = 0;
 }
 - (void)updateYourLabel:(NSTimer *)timer
 {
-    yourCountUpCentiseconds ++;
-    yourCentiseconds = yourCountUpCentiseconds % 100;
-    yourSeconds = (yourCountUpCentiseconds / 100) % 60;
-    yourMinutes = (yourCountUpCentiseconds / 100) / 60;
-    
-    //Sets your label
-    [self setYourLabel];
-
-    [storeData setInteger:yourCountUpCentiseconds forKey:@"yourCentiseconds"];
+    if (yourPrepCentiseconds > 0)
+    {
+        yourPrepCentiseconds --;
+        yourCentiseconds = yourPrepCentiseconds % 100;
+        yourSeconds = (yourPrepCentiseconds / 100) % 60;
+        yourMinutes = (yourPrepCentiseconds / 100) / 60;
+        
+        //Sets your label
+        [self setYourLabel];
+        
+        [storeData setInteger:yourPrepCentiseconds forKey:@"yourCentiseconds"];
+    }
+    else
+    {
+        [self.yourPrepTimer invalidate];
+        NSLog(@"Your prep time is finished");
+    }
 }
 - (void)setYourLabel
 {
@@ -151,7 +160,7 @@ int styleChosen = 0;
 }
 - (void)setYourButton
 {
-    if (yourCountUpCentiseconds > 0)
+    if (isYourPrepStarted)
     {
         [yourPrepButton setTitle:@"Resume" forState:UIControlStateNormal];
     }
@@ -167,6 +176,11 @@ int styleChosen = 0;
         [self runYourTimer];
         [yourPrepButton setTitle:@"Pause" forState:UIControlStateNormal];
         isYourPrepStarted = YES;
+        
+        if (isTheirPrepStarted)
+        {
+            [self pauseTheirTimer];
+        }
     }
     else if (!isYourPrepPaused)
     {
@@ -176,6 +190,7 @@ int styleChosen = 0;
     else if (isYourPrepPaused)
     {
         [self resumeYourTimer];
+        [self pauseTheirTimer];
     }
 }
 //Pauses your timer
@@ -197,13 +212,29 @@ int styleChosen = 0;
 - (void)resetYourPrep
 {
     [self.yourPrepTimer invalidate];
-    yourCountUpCentiseconds = 0;
-    [storeData setInteger:yourCountUpCentiseconds forKey:@"yourCentiseconds"];
-    isYourPrepStarted = NO;
-    isYourPrepPaused = NO;
-    yourMinutes = 0;
+    
+    if (styleChosen == 1)
+    {
+        prepValue = (int)[storeData integerForKey:@"prepValue"];
+        [storeData setInteger:prepValue forKey:@"prepValue"];
+    }
+    else if (styleChosen == 2)
+    {
+        prepValue = (int)[storeData integerForKey:@"prepValue"];
+        [storeData setInteger:prepValue forKey:@"prepValue"];
+    }
+    else if (styleChosen == 3)
+    {
+        prepValue = (int)[storeData integerForKey:@"prepValue"];
+        [storeData setInteger:prepValue forKey:@"prepValue"];
+    }
+    yourPrepCentiseconds = prepValue * 6000;
+    yourMinutes = prepValue;
     yourSeconds = 0;
     yourCentiseconds = 0;
+    [storeData setInteger:yourPrepCentiseconds forKey:@"yourCentiseconds"];
+    isYourPrepStarted = NO;
+    isYourPrepPaused = NO;
     [self setYourLabel];
     [yourPrepButton setTitle:@"Start" forState:UIControlStateNormal];
 }
@@ -222,16 +253,24 @@ int styleChosen = 0;
 }
 - (void)updateTheirLabel:(NSTimer *)timer
 {
-    theirCountUpCentiseconds ++;
-    theirCentiseconds = theirCountUpCentiseconds % 100;
-    theirSeconds = (theirCountUpCentiseconds / 100) % 60;
-    theirMinutes = (theirCountUpCentiseconds / 100) / 60;
+    if (theirPrepCentiseconds > 0)
+    {
+        theirPrepCentiseconds --;
+        theirCentiseconds = theirPrepCentiseconds % 100;
+        theirSeconds = (theirPrepCentiseconds / 100) % 60;
+        theirMinutes = (theirPrepCentiseconds / 100) / 60;
+        
+        //Sets their label
+        [self setTheirLabel];
+        
+        [storeData setInteger:theirPrepCentiseconds forKey:@"theirCentiseconds"];
+    }
+    else
+    {
+        [self.theirPrepTimer invalidate];
+        NSLog(@"Their prep times is finished");
+    }
 
-    //Sets their label
-    [self setTheirLabel];
-    
-    [storeData setInteger:theirCountUpCentiseconds forKey:@"theirCentiseconds"];
-    //NSLog(@"Their total prep time in centiseconds: %i", theirCountUpCentiseconds);
 }
 - (void)setTheirLabel
 {
@@ -247,7 +286,7 @@ int styleChosen = 0;
 }
 - (void)setTheirButton
 {
-    if (theirCountUpCentiseconds > 0)
+    if (isTheirPrepStarted)
     {
         [theirPrepButton setTitle:@"Resume" forState:UIControlStateNormal];
     }
@@ -263,6 +302,11 @@ int styleChosen = 0;
         [self runTheirTimer];
         [theirPrepButton setTitle:@"Pause" forState:UIControlStateNormal];
         isTheirPrepStarted = YES;
+        
+        if (isYourPrepStarted)
+        {
+            [self pauseYourTimer];
+        }
     }
     else if (!isTheirPrepPaused)
     {
@@ -272,6 +316,7 @@ int styleChosen = 0;
     else if (isTheirPrepPaused)
     {
         [self resumeTheirTimer];
+        [self pauseYourTimer];
     }
 }
 //Pauses their timer
@@ -293,13 +338,30 @@ int styleChosen = 0;
 - (void)resetTheirPrep
 {
     [self.theirPrepTimer invalidate];
-    theirCountUpCentiseconds = 0;
-    [storeData setInteger:theirCountUpCentiseconds forKey:@"theirCentiseconds"];
-    isTheirPrepStarted = NO;
-    isTheirPrepPaused = NO;
-    theirMinutes = 0;
+    
+    
+    if (styleChosen == 1)
+    {
+        prepValue = (int)[storeData integerForKey:@"prepValue"];
+        [storeData setInteger:prepValue forKey:@"prepValue"];
+    }
+    else if (styleChosen == 2)
+    {
+        prepValue = (int)[storeData integerForKey:@"prepValue"];
+        [storeData setInteger:prepValue forKey:@"prepValue"];
+    }
+    else if (styleChosen == 3)
+    {
+        prepValue = (int)[storeData integerForKey:@"prepValue"];
+        [storeData setInteger:prepValue forKey:@"prepValue"];
+    }
+    theirPrepCentiseconds = prepValue * 6000;
+    theirMinutes = prepValue;
     theirSeconds = 0;
     theirCentiseconds = 0;
+    [storeData setInteger:theirPrepCentiseconds forKey:@"theirCentiseconds"];
+    isTheirPrepStarted = NO;
+    isTheirPrepPaused = NO;
     [self setTheirLabel];
     [theirPrepButton setTitle:@"Start" forState:UIControlStateNormal];
 }

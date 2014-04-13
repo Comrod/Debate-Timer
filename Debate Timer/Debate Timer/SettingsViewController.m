@@ -85,6 +85,8 @@
         NSLog(@"Using old prep time");
     }
 
+    [[NSUserDefaults standardUserDefaults] setInteger:YES forKey:@"shouldResetPrep"];
+    
 }
 
 

@@ -39,7 +39,7 @@
 {
     self.whatStyle = 1;
     [storeData setInteger:self.whatStyle forKey:@"styleKey"];
-    
+    [storeData setInteger:5 forKey:@"prepValue"];
     [self performSegueWithIdentifier:@"segueToTimer" sender:self];
     
     //TimerViewController *timerVC = [self.storyboard instantiateViewControllerWithIdentifier:@"timerViewController"];
@@ -50,7 +50,7 @@
 {
     self.whatStyle = 2;
     [storeData setInteger:self.whatStyle forKey:@"styleKey"];
-    
+    [storeData setInteger:4 forKey:@"prepValue"];
     [self performSegueWithIdentifier:@"segueToTimer" sender:self];
     
     //TimerViewController *timerVC = [self.storyboard instantiateViewControllerWithIdentifier:@"timerViewController"];
@@ -61,7 +61,7 @@
 {
     self.whatStyle = 3;
     [storeData setInteger:self.whatStyle forKey:@"styleKey"];
-    
+    [storeData setInteger:2 forKey:@"prepValue"];
     [self performSegueWithIdentifier:@"segueToTimer" sender:self];
     
     //TimerViewController *timerVC = [self.storyboard instantiateViewControllerWithIdentifier:@"timerViewController"];
