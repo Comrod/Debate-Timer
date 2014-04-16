@@ -142,8 +142,18 @@ int styleChosen = 0;
     }
     else
     {
+        UIAlertView *yourAlert = [[UIAlertView alloc] initWithTitle:@"Your prep done" message:@"Your prep time is finished" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [yourAlert show];
+        
+        //Alert
+        AudioServicesPlayAlertSound(1322);
+        NSLog(@"Played system sound");
+        
         [self.yourPrepTimer invalidate];
         NSLog(@"Your prep time is finished");
+
+        [self resetYourPrep];
+        
     }
 }
 - (void)setYourLabel
@@ -267,8 +277,17 @@ int styleChosen = 0;
     }
     else
     {
+        UIAlertView *theirAlert = [[UIAlertView alloc] initWithTitle:@"Their prep done" message:@"Their prep time is finished" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [theirAlert show];
+        
+        //Alert
+        AudioServicesPlayAlertSound(1322);
+        NSLog(@"Played system sound");
+        
         [self.theirPrepTimer invalidate];
         NSLog(@"Their prep times is finished");
+        
+        [self resetTheirPrep];
     }
 
 }

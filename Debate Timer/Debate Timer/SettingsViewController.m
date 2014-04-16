@@ -84,8 +84,6 @@
         prepTimeLabel.text = [NSString stringWithFormat:@"%i", prepValue];
         NSLog(@"Using old prep time");
     }
-
-    [[NSUserDefaults standardUserDefaults] setInteger:YES forKey:@"shouldResetPrep"];
     
 }
 
@@ -109,6 +107,7 @@
 
 - (IBAction)prepStepperValueChanged:(id)sender
 {
+    [[NSUserDefaults standardUserDefaults] setInteger:YES forKey:@"shouldResetPrep"];
     prepValue = prepStepper.value;
     [storeData setInteger:prepValue forKey:@"prepValue"];
     prepTimeLabel.text = [NSString stringWithFormat:@"%i", prepValue];

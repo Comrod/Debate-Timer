@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#include <AudioToolbox/AudioToolbox.h>
 
-@interface PrepViewController : UIViewController
+@interface PrepViewController : UIViewController <UIAlertViewDelegate>
 {
     int prepValue;
 }
