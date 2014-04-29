@@ -17,6 +17,9 @@
 
 @synthesize yourPrepButton, theirPrepButton, yourPrepLabel, theirPrepLabel, yourPrepTimer, theirPrepTimer, storeData, affNameLabel, negNameLabel;
 
+BOOL yourPrep;
+BOOL theirPrep;
+
 BOOL isYourPrepStarted = NO;
 BOOL isYourPrepPaused = NO;
 
@@ -55,6 +58,7 @@ int styleChosen = 0;
     
     styleChosen = (int)[storeData integerForKey:@"styleKey"];
     
+    prepValue = (int)[storeData integerForKey:@"prepValue"];
     
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"shouldResetPrep"])
     {
@@ -68,15 +72,38 @@ int styleChosen = 0;
     {
         //Your prep time
         yourPrepCentiseconds = (int)[storeData integerForKey:@"yourCentiseconds"];
-        isYourPrepStarted = YES;
-        isYourPrepPaused = YES;
+        NSLog(@"yourPrepCentiseconds: %i", yourPrepCentiseconds);
+        
+        int prepChecker = prepValue*6000;
+        
+        if (yourPrepCentiseconds < prepChecker)
+        {
+            isYourPrepStarted = YES;
+            isYourPrepPaused = YES;
+        }
+        else
+        {
+            isYourPrepStarted = NO;
+            isYourPrepPaused = NO;
+            NSLog(@"Your Prep hasn't started");
+        }
         
         //Their prep time
         theirPrepCentiseconds = (int)[storeData integerForKey:@"theirCentiseconds"];
-        isTheirPrepStarted = YES;
-        isTheirPrepPaused = YES;
+        if (theirPrepCentiseconds < prepChecker)
+        {
+            isTheirPrepStarted = YES;
+            isTheirPrepPaused = YES;
+        }
+        else
+        {
+            isTheirPrepStarted = NO;
+            isTheirPrepPaused = NO;
+            NSLog(@"Their Prep hasn't started");
+        }
         
         NSLog(@"Using old prep time");
+
     }
     
     //Convert your centiseconds
@@ -223,21 +250,9 @@ int styleChosen = 0;
 {
     [self.yourPrepTimer invalidate];
     
-    if (styleChosen == 1)
-    {
-        prepValue = (int)[storeData integerForKey:@"prepValue"];
-        [storeData setInteger:prepValue forKey:@"prepValue"];
-    }
-    else if (styleChosen == 2)
-    {
-        prepValue = (int)[storeData integerForKey:@"prepValue"];
-        [storeData setInteger:prepValue forKey:@"prepValue"];
-    }
-    else if (styleChosen == 3)
-    {
-        prepValue = (int)[storeData integerForKey:@"prepValue"];
-        [storeData setInteger:prepValue forKey:@"prepValue"];
-    }
+    prepValue = (int)[storeData integerForKey:@"prepValue"];
+    [storeData setInteger:prepValue forKey:@"prepValue"];
+    
     yourPrepCentiseconds = prepValue * 6000;
     yourMinutes = prepValue;
     yourSeconds = 0;
@@ -358,22 +373,9 @@ int styleChosen = 0;
 {
     [self.theirPrepTimer invalidate];
     
+    prepValue = (int)[storeData integerForKey:@"prepValue"];
+    [storeData setInteger:prepValue forKey:@"prepValue"];
     
-    if (styleChosen == 1)
-    {
-        prepValue = (int)[storeData integerForKey:@"prepValue"];
-        [storeData setInteger:prepValue forKey:@"prepValue"];
-    }
-    else if (styleChosen == 2)
-    {
-        prepValue = (int)[storeData integerForKey:@"prepValue"];
-        [storeData setInteger:prepValue forKey:@"prepValue"];
-    }
-    else if (styleChosen == 3)
-    {
-        prepValue = (int)[storeData integerForKey:@"prepValue"];
-        [storeData setInteger:prepValue forKey:@"prepValue"];
-    }
     theirPrepCentiseconds = prepValue * 6000;
     theirMinutes = prepValue;
     theirSeconds = 0;
