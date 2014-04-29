@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -16,7 +16,7 @@
                                 <rect key="frame" x="21" y="27" width="279" height="57"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="47"/>
-                                <color key="textColor" red="1" green="0.66714102330000002" blue="0.1928617792" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="DWi-v5-IeG">
@@ -91,7 +91,7 @@
                                 <rect key="frame" x="21" y="28" width="279" height="57"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="47"/>
-                                <color key="textColor" red="1" green="0.66714102330000002" blue="0.1928617792" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="a8G-22-Iyu">
@@ -208,7 +208,7 @@
                                 <rect key="frame" x="21" y="28" width="279" height="57"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="47"/>
-                                <color key="textColor" red="1" green="0.66714102330000002" blue="0.1928617792" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.23430657760000001" green="0.53150480879999995" blue="0.96809231510000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7uN-gd-dFB">
@@ -286,7 +286,7 @@
                                 <rect key="frame" x="21" y="28" width="279" height="57"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="47"/>
-                                <color key="textColor" red="1" green="0.66714102330000002" blue="0.1928617792" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.23430657764573767" green="0.53150480883073026" blue="0.96809231505102045" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="d4r-0f-ikI">
@@ -409,13 +409,13 @@
             <point key="canvasLocation" x="573" y="5"/>
         </scene>
     </scenes>
-    <color key="tintColor" red="1" green="0.66294739039523742" blue="0.1631533821905875" alpha="1" colorSpace="calibratedRGB"/>
+    <color key="tintColor" red="0.23430657760000001" green="0.53150480879999995" blue="0.96809231510000004" alpha="1" colorSpace="calibratedRGB"/>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="lMW-kZ-M6X"/>
+        <segue reference="uRk-uJ-nMm"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -18,6 +18,12 @@
 @property (strong, nonatomic) IBOutlet UILabel *prepTimeLabel;
 @property (nonatomic) NSUserDefaults *storeData;
 @property (strong, nonatomic) IBOutlet UIStepper *prepStepper;
+@property (strong, nonatomic) UIColor *blueColor;
+@property (strong, nonatomic) UIColor *redColor;
+@property (strong, nonatomic) UIColor *greenColor;
+@property (strong, nonatomic) UIColor *orangeColor;
+@property (strong, nonatomic) UIColor *yellowColor;
+@property (strong, nonatomic) UIColor *pinkColor;
 
 
 - (IBAction)centisecondValueChanged:(id)sender;

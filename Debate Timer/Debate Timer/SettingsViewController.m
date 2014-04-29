@@ -14,7 +14,7 @@
 
 @implementation SettingsViewController
 
-@synthesize centisecondSegControl, prepTimeLabel, storeData, prepStepper;
+@synthesize centisecondSegControl, prepTimeLabel, storeData, prepStepper, blueColor, redColor, greenColor, orangeColor, yellowColor, pinkColor;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -29,6 +29,14 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    //Colors
+    blueColor = [UIColor colorWithRed:0 green:122 blue:255 alpha:1];
+    redColor = [UIColor colorWithRed:255 green:59 blue:66 alpha:1];
+    greenColor = [UIColor colorWithRed:78 green:194 blue:48 alpha:1];
+    orangeColor = [UIColor colorWithRed:255 green:170 blue:49 alpha:1];
+    yellowColor = [UIColor colorWithRed:246 green:219 blue:65 alpha:1];
+    pinkColor = [UIColor colorWithRed:255 green:83 blue:176 alpha:1];
     
     //Set up data storage
     storeData = [NSUserDefaults standardUserDefaults];
