@@ -24,6 +24,7 @@
 		248167BC18D937F100222A3B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 248167BA18D937F100222A3B /* InfoPlist.strings */; };
 		248167BE18D937F100222A3B /* Debate_TimerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 248167BD18D937F100222A3B /* Debate_TimerTests.m */; };
 		248167C918D93A8900222A3B /* TimerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 248167C818D93A8900222A3B /* TimerViewController.m */; };
+		2483FCCE193C153200529604 /* AKSystemSound.m in Sources */ = {isa = PBXBuildFile; fileRef = 2483FCCD193C153200529604 /* AKSystemSound.m */; };
 		24A78EB018DF40C200A885D0 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24A78EAF18DF40C200A885D0 /* AudioToolbox.framework */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +64,9 @@
 		248167BD18D937F100222A3B /* Debate_TimerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Debate_TimerTests.m; sourceTree = "<group>"; };
 		248167C718D93A8900222A3B /* TimerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerViewController.h; sourceTree = "<group>"; };
 		248167C818D93A8900222A3B /* TimerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimerViewController.m; sourceTree = "<group>"; };
+		2483FCCC193C153200529604 /* AKSystemSound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKSystemSound.h; sourceTree = "<group>"; };
+		2483FCCD193C153200529604 /* AKSystemSound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKSystemSound.m; sourceTree = "<group>"; };
+		2483FCD0193C1B8800529604 /* beep.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = beep.caf; path = ../beep.caf; sourceTree = "<group>"; };
 		24A78EAF18DF40C200A885D0 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -125,6 +129,8 @@
 		2481679818D937F100222A3B /* Debate Timer */ = {
 			isa = PBXGroup;
 			children = (
+				2483FCD0193C1B8800529604 /* beep.caf */,
+				2483FCCF193C153B00529604 /* AKSystemSound */,
 				248167A118D937F100222A3B /* AppDelegate.h */,
 				248167A218D937F100222A3B /* AppDelegate.m */,
 				248167A418D937F100222A3B /* Main.storyboard */,
@@ -169,6 +175,15 @@
 				248167BA18D937F100222A3B /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2483FCCF193C153B00529604 /* AKSystemSound */ = {
+			isa = PBXGroup;
+			children = (
+				2483FCCC193C153200529604 /* AKSystemSound.h */,
+				2483FCCD193C153200529604 /* AKSystemSound.m */,
+			);
+			name = AKSystemSound;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -276,6 +291,7 @@
 				248167A918D937F100222A3B /* ViewController.m in Sources */,
 				2470EC1118DAAAF2004618B4 /* SettingsViewController.m in Sources */,
 				248167A318D937F100222A3B /* AppDelegate.m in Sources */,
+				2483FCCE193C153200529604 /* AKSystemSound.m in Sources */,
 				2481679F18D937F100222A3B /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

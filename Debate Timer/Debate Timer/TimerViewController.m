@@ -9,8 +9,13 @@
 #import "TimerViewController.h"
 #import "ViewController.h"
 #import "SettingsViewController.h"
+#import "AKSystemSound.h"
+#import <AudioToolbox/AudioToolbox.h>
 
 @interface TimerViewController ()
+{
+    SystemSoundID soundID;
+}
 
 @end
 
@@ -32,10 +37,11 @@ BOOL pickerIsShowing = NO;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef)([NSURL URLWithString:@"beep.caf"]), &soundID);
+    
     //Set up data storage
     storeData = [NSUserDefaults standardUserDefaults];
     
-
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"goneHome"])
     {
         //Resets variables if you have gone to the home screen
@@ -61,7 +67,7 @@ BOOL pickerIsShowing = NO;
     }
     
     //Policy Arrays
-    policyTimes = [NSArray arrayWithObjects: @8, @3, @8, @3, @8, @3, @8, @3, @5, @5, @5, @5, @0, nil];
+    policyTimes = [NSArray arrayWithObjects: @1, @3, @8, @3, @8, @3, @8, @3, @5, @5, @5, @5, @0, nil];
     policySpeeches = [NSArray arrayWithObjects:@"1AC", @"CX", @"1NC", @"CX", @"2AC", @"CX", @"2NC", @"CX", @"1NR", @"1AR", @"2NR", @"2AR", @"Round Finished", nil];
     
     //Lincoln-Douglas Arrays
@@ -258,8 +264,9 @@ BOOL pickerIsShowing = NO;
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Timer done" message:@"Speech is finished" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
         
-        //Alert
-        AudioServicesPlayAlertSound(1322);
+        //AudioServicesPlayAlertSound(1322);
+        AudioServicesPlaySystemSound(soundID);
+        
         NSLog(@"Played system sound");
         
         speechCounter ++;
@@ -297,8 +304,7 @@ BOOL pickerIsShowing = NO;
 {
     if (buttonIndex==0)
     {
-        AudioServicesDisposeSystemSoundID(1322);
-        //AudioServicesDisposeSystemSoundID(soundID);
+        AudioServicesDisposeSystemSoundID(soundID);
     }
     NSLog(@"Alert has been dismissed");
 }
