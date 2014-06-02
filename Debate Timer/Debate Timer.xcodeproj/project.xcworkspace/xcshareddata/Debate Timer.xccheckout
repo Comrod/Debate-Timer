@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>57D934C3-F4CB-4D39-B6D6-C18E74654A79</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Debate Timer</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>08080C05-C95B-4146-A9C9-88A7AAD1CD13</key>
+		<string>https://github.com/Comrod/Debate-Timer.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Debate Timer/Debate Timer.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>08080C05-C95B-4146-A9C9-88A7AAD1CD13</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/Comrod/Debate-Timer.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>08080C05-C95B-4146-A9C9-88A7AAD1CD13</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>08080C05-C95B-4146-A9C9-88A7AAD1CD13</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Debate-Timer</string>
+		</dict>
+	</array>
+</dict>
+</plist>
