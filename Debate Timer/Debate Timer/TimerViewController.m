@@ -9,6 +9,7 @@
 #import "TimerViewController.h"
 #import "ViewController.h"
 #import "SettingsViewController.h"
+#import "AKSystemSound.h"
 
 @interface TimerViewController ()
 
@@ -61,7 +62,7 @@ BOOL pickerIsShowing = NO;
     }
     
     //Policy Arrays
-    policyTimes = [NSArray arrayWithObjects: @8, @3, @8, @3, @8, @3, @8, @3, @5, @5, @5, @5, @0, nil];
+    policyTimes = [NSArray arrayWithObjects: @1, @3, @8, @3, @8, @3, @8, @3, @5, @5, @5, @5, @0, nil];
     policySpeeches = [NSArray arrayWithObjects:@"1AC", @"CX", @"1NC", @"CX", @"2AC", @"CX", @"2NC", @"CX", @"1NR", @"1AR", @"2NR", @"2AR", @"Round Finished", nil];
     
     //Lincoln-Douglas Arrays
@@ -259,8 +260,8 @@ BOOL pickerIsShowing = NO;
         [alert show];
         
         //Alert
-        AudioServicesPlayAlertSound(1322);
-        NSLog(@"Played system sound");
+        [[AKSystemSound soundWithName:@"beep"] play];
+        NSLog(@"Played sound");
         
         speechCounter ++;
         
@@ -297,8 +298,7 @@ BOOL pickerIsShowing = NO;
 {
     if (buttonIndex==0)
     {
-        AudioServicesDisposeSystemSoundID(1322);
-        //AudioServicesDisposeSystemSoundID(soundID);
+        [AKSystemSound freeSoundWithName:@"beep"];
     }
     NSLog(@"Alert has been dismissed");
 }
