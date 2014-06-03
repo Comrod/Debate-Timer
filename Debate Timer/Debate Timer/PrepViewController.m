@@ -8,6 +8,7 @@
 
 #import "PrepViewController.h"
 #import "ViewController.h"
+#import "PlaySound.h"
 
 @interface PrepViewController ()
 
@@ -172,6 +173,8 @@ int styleChosen = 0;
         UIAlertView *yourAlert = [[UIAlertView alloc] initWithTitle:@"Your prep done" message:@"Your prep time is finished" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [yourAlert show];
         
+        [PlaySound playSound];
+        
         //Alert
         AudioServicesPlayAlertSound(1322);
         NSLog(@"Played system sound");
@@ -295,6 +298,8 @@ int styleChosen = 0;
         UIAlertView *theirAlert = [[UIAlertView alloc] initWithTitle:@"Their prep done" message:@"Their prep time is finished" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [theirAlert show];
         
+        [PlaySound playSound];
+        
         //Alert
         AudioServicesPlayAlertSound(1322);
         NSLog(@"Played system sound");
@@ -395,6 +400,15 @@ int styleChosen = 0;
 - (IBAction)backButtonTap:(id)sender
 {
     [self performSegueWithIdentifier:@"segueFromPrep" sender:self];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex==0)
+    {
+        [PlaySound stopSound];
+    }
+    NSLog(@"Alert has been dismissed");
 }
 
 - (void)didReceiveMemoryWarning

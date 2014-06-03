@@ -27,6 +27,7 @@
 		24A78EB018DF40C200A885D0 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24A78EAF18DF40C200A885D0 /* AudioToolbox.framework */; };
 		24D47C63193D51E80002D6F9 /* beep.caf in Resources */ = {isa = PBXBuildFile; fileRef = 24D47C62193D51E40002D6F9 /* beep.caf */; };
 		24D47C66193D52440002D6F9 /* AKSystemSound.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D47C65193D52440002D6F9 /* AKSystemSound.m */; };
+		24D47C6A193D5D6A0002D6F9 /* PlaySound.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D47C69193D5D6A0002D6F9 /* PlaySound.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,8 @@
 		24D47C62193D51E40002D6F9 /* beep.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = beep.caf; sourceTree = "<group>"; };
 		24D47C64193D52440002D6F9 /* AKSystemSound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKSystemSound.h; sourceTree = "<group>"; };
 		24D47C65193D52440002D6F9 /* AKSystemSound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKSystemSound.m; sourceTree = "<group>"; };
+		24D47C68193D5D6A0002D6F9 /* PlaySound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaySound.h; sourceTree = "<group>"; };
+		24D47C69193D5D6A0002D6F9 /* PlaySound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaySound.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +137,8 @@
 				24D47C67193D52480002D6F9 /* AKSystemSound */,
 				248167A118D937F100222A3B /* AppDelegate.h */,
 				248167A218D937F100222A3B /* AppDelegate.m */,
+				24D47C68193D5D6A0002D6F9 /* PlaySound.h */,
+				24D47C69193D5D6A0002D6F9 /* PlaySound.m */,
 				248167A418D937F100222A3B /* Main.storyboard */,
 				248167A718D937F100222A3B /* ViewController.h */,
 				248167A818D937F100222A3B /* ViewController.m */,
@@ -293,6 +298,7 @@
 				248167A918D937F100222A3B /* ViewController.m in Sources */,
 				2470EC1118DAAAF2004618B4 /* SettingsViewController.m in Sources */,
 				248167A318D937F100222A3B /* AppDelegate.m in Sources */,
+				24D47C6A193D5D6A0002D6F9 /* PlaySound.m in Sources */,
 				24D47C66193D52440002D6F9 /* AKSystemSound.m in Sources */,
 				2481679F18D937F100222A3B /* main.m in Sources */,
 			);

@@ -9,7 +9,7 @@
 #import "TimerViewController.h"
 #import "ViewController.h"
 #import "SettingsViewController.h"
-#import "AKSystemSound.h"
+#import "PlaySound.h"
 
 @interface TimerViewController ()
 
@@ -260,8 +260,7 @@ BOOL pickerIsShowing = NO;
         [alert show];
         
         //Alert
-        [[AKSystemSound soundWithName:@"beep"] play];
-        NSLog(@"Played sound");
+        [PlaySound playSound];
         
         speechCounter ++;
         
@@ -298,7 +297,7 @@ BOOL pickerIsShowing = NO;
 {
     if (buttonIndex==0)
     {
-        [AKSystemSound freeSoundWithName:@"beep"];
+        [PlaySound stopSound];
     }
     NSLog(@"Alert has been dismissed");
 }
