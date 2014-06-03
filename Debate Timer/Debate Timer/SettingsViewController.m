@@ -93,6 +93,7 @@
         NSLog(@"Using old prep time");
     }
     
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"fromSettings"];
 }
 
 
@@ -129,6 +130,7 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    [storeData setInteger:prepValue forKey:@"prepValue"];
 }
 
 - (void)didReceiveMemoryWarning

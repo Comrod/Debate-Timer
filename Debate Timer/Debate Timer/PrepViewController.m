@@ -77,6 +77,8 @@ int styleChosen = 0;
         
         int prepChecker = prepValue*6000;
         
+        NSLog(@"PrepChecker: %i, PrepValue: %i", prepChecker, prepValue);
+        
         if (yourPrepCentiseconds < prepChecker)
         {
             isYourPrepStarted = YES;

@@ -27,6 +27,7 @@
     
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"goneHome"];
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"shouldResetPrep"];
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"fromSettings"];
 }
 
 - (void)didReceiveMemoryWarning
