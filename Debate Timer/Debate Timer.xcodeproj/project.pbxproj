@@ -17,15 +17,15 @@
 		248167A318D937F100222A3B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 248167A218D937F100222A3B /* AppDelegate.m */; };
 		248167A618D937F100222A3B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 248167A418D937F100222A3B /* Main.storyboard */; };
 		248167A918D937F100222A3B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 248167A818D937F100222A3B /* ViewController.m */; };
-		248167AB18D937F100222A3B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 248167AA18D937F100222A3B /* Images.xcassets */; };
 		248167B218D937F100222A3B /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 248167B118D937F100222A3B /* XCTest.framework */; };
 		248167B318D937F100222A3B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2481679218D937F100222A3B /* Foundation.framework */; };
 		248167B418D937F100222A3B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2481679618D937F100222A3B /* UIKit.framework */; };
 		248167BC18D937F100222A3B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 248167BA18D937F100222A3B /* InfoPlist.strings */; };
 		248167BE18D937F100222A3B /* Debate_TimerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 248167BD18D937F100222A3B /* Debate_TimerTests.m */; };
 		248167C918D93A8900222A3B /* TimerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 248167C818D93A8900222A3B /* TimerViewController.m */; };
-		2483FCCE193C153200529604 /* AKSystemSound.m in Sources */ = {isa = PBXBuildFile; fileRef = 2483FCCD193C153200529604 /* AKSystemSound.m */; };
 		24A78EB018DF40C200A885D0 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24A78EAF18DF40C200A885D0 /* AudioToolbox.framework */; };
+		24D47C60193D513B0002D6F9 /* Debate TimerTests-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 248167B918D937F100222A3B /* Debate TimerTests-Info.plist */; };
+		24D47C61193D51400002D6F9 /* beep.caf in Resources */ = {isa = PBXBuildFile; fileRef = 24D47C5F193D51250002D6F9 /* beep.caf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,10 +64,8 @@
 		248167BD18D937F100222A3B /* Debate_TimerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Debate_TimerTests.m; sourceTree = "<group>"; };
 		248167C718D93A8900222A3B /* TimerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerViewController.h; sourceTree = "<group>"; };
 		248167C818D93A8900222A3B /* TimerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimerViewController.m; sourceTree = "<group>"; };
-		2483FCCC193C153200529604 /* AKSystemSound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AKSystemSound.h; sourceTree = "<group>"; };
-		2483FCCD193C153200529604 /* AKSystemSound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AKSystemSound.m; sourceTree = "<group>"; };
-		2483FCD0193C1B8800529604 /* beep.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = beep.caf; path = ../beep.caf; sourceTree = "<group>"; };
 		24A78EAF18DF40C200A885D0 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		24D47C5F193D51250002D6F9 /* beep.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = beep.caf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,8 +127,7 @@
 		2481679818D937F100222A3B /* Debate Timer */ = {
 			isa = PBXGroup;
 			children = (
-				2483FCD0193C1B8800529604 /* beep.caf */,
-				2483FCCF193C153B00529604 /* AKSystemSound */,
+				24D47C5F193D51250002D6F9 /* beep.caf */,
 				248167A118D937F100222A3B /* AppDelegate.h */,
 				248167A218D937F100222A3B /* AppDelegate.m */,
 				248167A418D937F100222A3B /* Main.storyboard */,
@@ -175,15 +172,6 @@
 				248167BA18D937F100222A3B /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		2483FCCF193C153B00529604 /* AKSystemSound */ = {
-			isa = PBXGroup;
-			children = (
-				2483FCCC193C153200529604 /* AKSystemSound.h */,
-				2483FCCD193C153200529604 /* AKSystemSound.m */,
-			);
-			name = AKSystemSound;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -265,7 +253,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				248167AB18D937F100222A3B /* Images.xcassets in Resources */,
+				24D47C61193D51400002D6F9 /* beep.caf in Resources */,
+				24D47C60193D513B0002D6F9 /* Debate TimerTests-Info.plist in Resources */,
 				2481679D18D937F100222A3B /* InfoPlist.strings in Resources */,
 				248167A618D937F100222A3B /* Main.storyboard in Resources */,
 			);
@@ -291,7 +280,6 @@
 				248167A918D937F100222A3B /* ViewController.m in Sources */,
 				2470EC1118DAAAF2004618B4 /* SettingsViewController.m in Sources */,
 				248167A318D937F100222A3B /* AppDelegate.m in Sources */,
-				2483FCCE193C153200529604 /* AKSystemSound.m in Sources */,
 				2481679F18D937F100222A3B /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

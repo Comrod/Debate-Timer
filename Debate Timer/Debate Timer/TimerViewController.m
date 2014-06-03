@@ -9,7 +9,6 @@
 #import "TimerViewController.h"
 #import "ViewController.h"
 #import "SettingsViewController.h"
-#import "AKSystemSound.h"
 #import <AudioToolbox/AudioToolbox.h>
 
 @interface TimerViewController ()
@@ -36,8 +35,6 @@ BOOL pickerIsShowing = NO;
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    AudioServicesCreateSystemSoundID((__bridge CFURLRef)([NSURL URLWithString:@"beep.caf"]), &soundID);
     
     //Set up data storage
     storeData = [NSUserDefaults standardUserDefaults];
@@ -202,6 +199,12 @@ BOOL pickerIsShowing = NO;
             [self timerRuns];
             
             [startTimerButton setTitle:@"Pause Timer" forState:UIControlStateNormal];
+            
+            NSString *beepPath = [[NSBundle mainBundle] pathForResource:@"beep" ofType:@"caf"];
+            NSURL *beepURL = [NSURL fileURLWithPath:beepPath];
+            AudioServicesCreateSystemSoundID((__bridge CFURLRef)beepURL, &soundID);
+            AudioServicesPlaySystemSound(soundID);
+            
         }
         else
         {
@@ -264,9 +267,6 @@ BOOL pickerIsShowing = NO;
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Timer done" message:@"Speech is finished" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
         
-        //AudioServicesPlayAlertSound(1322);
-        AudioServicesPlaySystemSound(soundID);
-        
         NSLog(@"Played system sound");
         
         speechCounter ++;
@@ -304,7 +304,6 @@ BOOL pickerIsShowing = NO;
 {
     if (buttonIndex==0)
     {
-        AudioServicesDisposeSystemSoundID(soundID);
     }
     NSLog(@"Alert has been dismissed");
 }
