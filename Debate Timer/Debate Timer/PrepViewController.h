@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #include <AudioToolbox/AudioToolbox.h>
+#import "PlaySound.h"
 
 @interface PrepViewController : UIViewController <UIAlertViewDelegate>
 {

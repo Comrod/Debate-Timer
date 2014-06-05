@@ -177,10 +177,6 @@ int styleChosen = 0;
         
         [PlaySound playSound];
         
-        //Alert
-        AudioServicesPlayAlertSound(1322);
-        NSLog(@"Played system sound");
-        
         [self.yourPrepTimer invalidate];
         NSLog(@"Your prep time is finished");
 
@@ -301,10 +297,6 @@ int styleChosen = 0;
         [theirAlert show];
         
         [PlaySound playSound];
-        
-        //Alert
-        AudioServicesPlayAlertSound(1322);
-        NSLog(@"Played system sound");
         
         [self.theirPrepTimer invalidate];
         NSLog(@"Their prep times is finished");

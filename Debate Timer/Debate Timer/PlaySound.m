@@ -13,13 +13,13 @@
 
 + (void)playSound
 {
-    [[AKSystemSound soundWithName:@"beep"] play];
+    [[AKSystemSound soundWithName:@"alarm"] play];
     NSLog(@"Played sound");
 }
 
 + (void)stopSound
 {
-    [AKSystemSound freeSoundWithName:@"beep"];
+    [AKSystemSound freeSoundWithName:@"alarm"];
 }
 
 @end

@@ -35,7 +35,6 @@ BOOL pickerIsShowing = NO;
     
     //Set up data storage
     storeData = [NSUserDefaults standardUserDefaults];
-    
 
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"goneHome"])
     {
@@ -67,7 +66,7 @@ BOOL pickerIsShowing = NO;
     }
     
     //Policy Arrays
-    policyTimes = [NSArray arrayWithObjects: @8, @3, @8, @3, @8, @3, @8, @3, @5, @5, @5, @5, @0, nil];
+    policyTimes = [NSArray arrayWithObjects: @1, @3, @8, @3, @8, @3, @8, @3, @5, @5, @5, @5, @0, nil];
     policySpeeches = [NSArray arrayWithObjects:@"1AC", @"CX", @"1NC", @"CX", @"2AC", @"CX", @"2NC", @"CX", @"1NR", @"1AR", @"2NR", @"2AR", @"Round Finished", nil];
     
     //Lincoln-Douglas Arrays
