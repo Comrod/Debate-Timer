@@ -3,7 +3,7 @@
 //  Debate Timer
 //
 //  Created by Cormac Chester on 3/19/14.
-//  Copyright (c) 2014 Testman Industries. All rights reserved.
+//  Copyright (c) 2014 Extreme Images Inc. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
