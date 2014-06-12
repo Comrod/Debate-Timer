@@ -111,8 +111,17 @@
     
     
     //Primary Style
-    [self.primaryStyleSegControl setSelectedSegmentIndex:styleChosen];
-    [self pickPrimaryStyle];
+    
+    if (![storeData boolForKey:@"firstSettingsVisit"])
+    {
+        [self.primaryStyleSegControl setSelectedSegmentIndex:styleChosen];
+        [self pickPrimaryStyle];
+    }
+    else
+    {
+        [self.primaryStyleSegControl setSelectedSegmentIndex:[storeData integerForKey:@"primaryStyle"]];
+    }
+    [storeData setBool:YES forKey:@"firstSettingsVisit"];
     
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"fromSettings"];
 }
