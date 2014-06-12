@@ -343,15 +343,15 @@ BOOL pickerIsShowing = NO;
     timerFinished = YES;
     [self setDataToStorage];
     
-    if (styleChosen == 1)
+    if (styleChosen == 0)
     {
         [self setDataForPolicy];
     }
-    else if (styleChosen == 2)
+    else if (styleChosen == 1)
     {
         [self setDataForLD];
     }
-    else if (styleChosen == 3)
+    else if (styleChosen == 2)
     {
         [self setDataForPFD];
     }
