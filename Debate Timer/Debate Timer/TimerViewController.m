@@ -49,6 +49,7 @@ BOOL pickerIsShowing = NO;
         if (!timerStarted)
         {
             [startTimerButton setTitle:@"Start Timer" forState:UIControlStateNormal];
+            timerPaused = NO;
             NSLog(@"Timer hasn't started");
         }
         else
@@ -196,6 +197,7 @@ BOOL pickerIsShowing = NO;
 {
     if (!timerStarted)
     {
+         NSLog(@"Button decides: timer NOT started");
         if (countdownTimeCentiseconds > 0)
         {
             [self timerRuns];
@@ -210,6 +212,7 @@ BOOL pickerIsShowing = NO;
     }
     else if (timerStarted)
     {
+        NSLog(@"Button decides: timer started");
         if (!timerPaused)
         {
             //Pauses timer
