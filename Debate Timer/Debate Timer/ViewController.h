@@ -14,6 +14,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *ldButton;
 @property (strong, nonatomic) IBOutlet UIButton *pfButton;
 @property (nonatomic) NSInteger whatStyle;
+@property (nonatomic) NSInteger prepTime;
 @property (nonatomic) NSUserDefaults *storeData;
 
 - (IBAction)tapPolicyButton:(id)sender;

@@ -18,6 +18,7 @@
 
 @synthesize storeData;
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -28,6 +29,41 @@
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"goneHome"];
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"shouldResetPrep"];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"fromSettings"];
+
+    NSLog(@"HomeSkipInt: %i", (int)[storeData integerForKey:@"homeSkip"]);
+    
+    if ([storeData boolForKey:@"firstLaunch"])
+    {
+        if ([storeData integerForKey:@"homeSkip"] == 1)
+        {
+            [self performSelector:@selector(skipHome) withObject:self afterDelay:1.0F];
+        }
+    }
+}
+
+- (void)skipHome
+{
+    NSLog(@"Going to skip home");
+    self.whatStyle = [storeData integerForKey:@"primaryStyle"];
+    if (self.whatStyle == 0)
+    {
+        self.prepTime = 5;
+    }
+    else if (self.whatStyle == 1)
+    {
+        self.prepTime = 4;
+    }
+    else if (self.whatStyle == 2)
+    {
+        self.prepTime = 2;
+    }
+    
+    [storeData setInteger:self.whatStyle forKey:@"styleKey"];
+    [storeData setInteger:self.prepTime forKey:@"prepValue"];
+    
+    NSLog(@"Setup finished");
+    
+    [self performSegueWithIdentifier:@"segueToTimer" sender:self];
 }
 
 - (void)didReceiveMemoryWarning
@@ -38,9 +74,10 @@
 
 - (IBAction)tapPolicyButton:(id)sender
 {
-    self.whatStyle = 1;
+    self.whatStyle = 0;
+    self.prepTime = 5;
     [storeData setInteger:self.whatStyle forKey:@"styleKey"];
-    [storeData setInteger:5 forKey:@"prepValue"];
+    [storeData setInteger:self.prepTime forKey:@"prepValue"];
     [self performSegueWithIdentifier:@"segueToTimer" sender:self];
     
     //TimerViewController *timerVC = [self.storyboard instantiateViewControllerWithIdentifier:@"timerViewController"];
@@ -49,9 +86,10 @@
 
 - (IBAction)tapLDButton:(id)sender
 {
-    self.whatStyle = 2;
+    self.whatStyle = 1;
+    self.prepTime = 4;
     [storeData setInteger:self.whatStyle forKey:@"styleKey"];
-    [storeData setInteger:4 forKey:@"prepValue"];
+    [storeData setInteger:self.prepTime forKey:@"prepValue"];
     [self performSegueWithIdentifier:@"segueToTimer" sender:self];
     
     //TimerViewController *timerVC = [self.storyboard instantiateViewControllerWithIdentifier:@"timerViewController"];
@@ -60,12 +98,18 @@
 
 - (IBAction)tapPFButton:(id)sender
 {
-    self.whatStyle = 3;
+    self.whatStyle = 2;
+    self.prepTime = 2;
     [storeData setInteger:self.whatStyle forKey:@"styleKey"];
-    [storeData setInteger:2 forKey:@"prepValue"];
+    [storeData setInteger:self.prepTime forKey:@"prepValue"];
     [self performSegueWithIdentifier:@"segueToTimer" sender:self];
     
     //TimerViewController *timerVC = [self.storyboard instantiateViewControllerWithIdentifier:@"timerViewController"];
     //[self presentViewController:timerVC animated:YES completion:nil];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    
 }
 @end

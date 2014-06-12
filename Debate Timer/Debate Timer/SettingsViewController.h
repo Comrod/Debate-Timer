@@ -15,6 +15,8 @@
 
 
 @property (strong, nonatomic) IBOutlet UISegmentedControl *centisecondSegControl;
+@property (strong, nonatomic) IBOutlet UISegmentedControl *primaryStyleSegControl;
+@property (strong, nonatomic) IBOutlet UISwitch *homeSkipSwitch;
 @property (strong, nonatomic) IBOutlet UILabel *prepTimeLabel;
 @property (nonatomic) NSUserDefaults *storeData;
 @property (strong, nonatomic) IBOutlet UIStepper *prepStepper;
@@ -27,6 +29,8 @@
 
 
 - (IBAction)centisecondValueChanged:(id)sender;
+- (IBAction)primaryStyleValueChanged:(id)sender;
+- (IBAction)homeSkipSwitchValueChanged:(id)sender;
 - (IBAction)backButtonTap:(id)sender;
 - (IBAction)prepStepperValueChanged:(id)sender;
 

@@ -14,7 +14,7 @@
 
 @implementation SettingsViewController
 
-@synthesize centisecondSegControl, prepTimeLabel, storeData, prepStepper, blueColor, redColor, greenColor, orangeColor, yellowColor, pinkColor;
+@synthesize centisecondSegControl, primaryStyleSegControl, homeSkipSwitch, prepTimeLabel, storeData, prepStepper, blueColor, redColor, greenColor, orangeColor, yellowColor, pinkColor;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -30,6 +30,21 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    //Set up data storage
+    storeData = [NSUserDefaults standardUserDefaults];
+    
+    NSLog(@"Value of Home Skip Switch: %ld", (long)[storeData integerForKey:@"homeSkip"]);
+    if ([storeData integerForKey:@"homeSkip"] == 1)
+    {
+        [homeSkipSwitch setOn:YES];
+        NSLog(@"Set switch on");
+    }
+    else if ([storeData integerForKey:@"homeSkip"] == 0)
+    {
+        [homeSkipSwitch setOn:NO];
+        NSLog(@"Set switch off");
+    }
+    
     //Colors
     blueColor = [UIColor colorWithRed:0 green:122 blue:255 alpha:1];
     redColor = [UIColor colorWithRed:255 green:59 blue:66 alpha:1];
@@ -38,8 +53,6 @@
     yellowColor = [UIColor colorWithRed:246 green:219 blue:65 alpha:1];
     pinkColor = [UIColor colorWithRed:255 green:83 blue:176 alpha:1];
     
-    //Set up data storage
-    storeData = [NSUserDefaults standardUserDefaults];
     
     //Decimals
     //
@@ -62,20 +75,23 @@
     
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"shouldResetPrep"])
     {
-        if (styleChosen == 1)
+        if (styleChosen == 0)
         {
             //Policy base prep
             basePrep = 5;
+            [self.primaryStyleSegControl setSelectedSegmentIndex:0];
         }
-        else if (styleChosen == 2)
+        else if (styleChosen == 1)
         {
             //LD base prep
             basePrep = 4;
+            [self.primaryStyleSegControl setSelectedSegmentIndex:1];
         }
-        else if (styleChosen == 3)
+        else if (styleChosen == 2)
         {
             //PFD base prep
             basePrep = 2;
+            [self.primaryStyleSegControl setSelectedSegmentIndex:2];
         }
         prepValue = basePrep;
         prepStepper.value = prepValue;
@@ -93,6 +109,11 @@
         NSLog(@"Using old prep time");
     }
     
+    
+    //Primary Style
+    [self.primaryStyleSegControl setSelectedSegmentIndex:styleChosen];
+    [self pickPrimaryStyle];
+    
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"fromSettings"];
 }
 
@@ -107,6 +128,39 @@
     {
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isCenti"];
     }
+}
+
+- (IBAction)primaryStyleValueChanged:(id)sender
+{
+    [self pickPrimaryStyle];
+}
+
+- (void)pickPrimaryStyle
+{
+    if ([self.primaryStyleSegControl selectedSegmentIndex] == 0)
+    {
+        //Policy selected
+        [storeData setInteger:0 forKey:@"primaryStyle"];
+        NSLog(@"Policy selected as primary style");
+    }
+    else if ([self.primaryStyleSegControl selectedSegmentIndex] == 1)
+    {
+        //LD selected
+        [storeData setInteger:1 forKey:@"primaryStyle"];
+        NSLog(@"LD selected as primary style");
+    }
+    else if ([self.primaryStyleSegControl selectedSegmentIndex] == 2)
+    {
+        //PFD selected
+        [storeData setInteger:2 forKey:@"primaryStyle"];
+        NSLog(@"PFD selected as primary style");
+    }
+}
+
+- (IBAction)homeSkipSwitchValueChanged:(id)sender
+{
+    [storeData setInteger:homeSkipSwitch.on forKey:@"homeSkip"];
+    NSLog(@"Value of Home Skip Switch: %d", homeSkipSwitch.on);
 }
 
 - (IBAction)backButtonTap:(id)sender
@@ -131,6 +185,8 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     [storeData setInteger:prepValue forKey:@"prepValue"];
+    NSLog(@"Home Skip before segue: %d", homeSkipSwitch.on);
+    [storeData setInteger:homeSkipSwitch.on forKey:@"homeSkip"];
 }
 
 - (void)didReceiveMemoryWarning

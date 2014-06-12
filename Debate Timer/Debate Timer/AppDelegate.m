@@ -13,6 +13,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    self.storeData = [NSUserDefaults standardUserDefaults];
+    [self.storeData setBool:YES forKey:@"firstLaunch"];
+    NSLog(@"First Launch bool: %d", [self.storeData boolForKey:@"firstLaunch"]);
+    
     return YES;
 }
 							
@@ -41,6 +45,8 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    [self.storeData setBool:YES forKey:@"firstLaunch"];
+    NSLog(@"First Launch bool: %d", [self.storeData boolForKey:@"firstLaunch"]);
 }
 
 @end

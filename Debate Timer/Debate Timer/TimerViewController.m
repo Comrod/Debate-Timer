@@ -33,9 +33,15 @@ BOOL pickerIsShowing = NO;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    
+    
     //Set up data storage
     storeData = [NSUserDefaults standardUserDefaults];
 
+    [storeData setBool:NO forKey:@"firstLaunch"];
+    
+    NSLog(@"Home skip switch: %i", (int)[storeData integerForKey:@"homeSkip"]);
+    
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"goneHome"])
     {
         //Resets variables if you have gone to the home screen
@@ -91,7 +97,7 @@ BOOL pickerIsShowing = NO;
 {
     styleChosen = (int)[storeData integerForKey:@"styleKey"];
     
-    if (styleChosen == 1)
+    if (styleChosen == 0)
     {
         //Policy
         [self setDataForPolicy];
@@ -102,7 +108,7 @@ BOOL pickerIsShowing = NO;
         self.styleLabel.text = [NSString stringWithFormat:@"Policy"];
         NSLog(@"Policy timing selected");
     }
-    else if (styleChosen == 2)
+    else if (styleChosen == 1)
     {
         //Lincoln-Douglas
         [self setDataForLD];
@@ -113,7 +119,7 @@ BOOL pickerIsShowing = NO;
         self.styleLabel.text = [NSString stringWithFormat:@"Lincoln-Douglas"];
         NSLog(@"LD timing selected");
     }
-    else if (styleChosen == 3)
+    else if (styleChosen == 2)
     {
         //Public Forum
         [self setDataForPFD];
@@ -272,17 +278,17 @@ BOOL pickerIsShowing = NO;
         speechCounter ++;
         
         //Set labels for next speech
-        if (styleChosen == 1)
+        if (styleChosen == 0)
         {
             [self setDataForPolicy];
             NSLog(@"Next speech: %@", speechLabel.text);
         }
-        else if (styleChosen == 2)
+        else if (styleChosen == 1)
         {
             [self setDataForLD];
             NSLog(@"Next speech: %@", speechLabel.text);
         }
-        else if (styleChosen == 3)
+        else if (styleChosen == 2)
         {
             [self setDataForPFD];
             NSLog(@"Next speech: %@", speechLabel.text);
@@ -450,15 +456,15 @@ BOOL pickerIsShowing = NO;
     speechCounter = (int)row;
     [storeData setInteger:speechCounter forKey:@"speechCounter"];
     
-    if (styleChosen == 1)
+    if (styleChosen == 0)
     {
         [self setDataForPolicy];
     }
-    else if (styleChosen == 2)
+    else if (styleChosen == 1)
     {
         [self setDataForLD];
     }
-    else if (styleChosen == 3)
+    else if (styleChosen == 2)
     {
         [self setDataForPFD];
     }

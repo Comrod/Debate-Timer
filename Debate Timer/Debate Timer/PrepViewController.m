@@ -137,12 +137,12 @@ int styleChosen = 0;
         NSLog(@"Not showing centiseconds");
     }
     
-    if (styleChosen == 1 || styleChosen == 2)
+    if (styleChosen == 0 || styleChosen == 1)
     {
         affNameLabel.text = @"Aff Prep Time";
         negNameLabel.text = @"Neg Prep Time";
     }
-    else if (styleChosen == 3)
+    else if (styleChosen == 2)
     {
         affNameLabel.text = @"Pro Prep Time";
         negNameLabel.text = @"Con Prep Time";
