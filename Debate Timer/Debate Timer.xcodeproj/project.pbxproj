@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2402D2C6194954F000BCA105 /* DejalActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2402D2C5194954F000BCA105 /* DejalActivityView.m */; };
 		24492E4B19401E5F0082F834 /* alarm.caf in Resources */ = {isa = PBXBuildFile; fileRef = 24492E4A19401E590082F834 /* alarm.caf */; };
 		2470EC1118DAAAF2004618B4 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2470EC1018DAAAF2004618B4 /* SettingsViewController.m */; };
 		2470EC1518DB7D3E004618B4 /* PrepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2470EC1418DB7D3E004618B4 /* PrepViewController.m */; };
@@ -41,6 +42,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2402D2C4194954F000BCA105 /* DejalActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DejalActivityView.h; sourceTree = "<group>"; };
+		2402D2C5194954F000BCA105 /* DejalActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DejalActivityView.m; sourceTree = "<group>"; };
 		24492E4A19401E590082F834 /* alarm.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = alarm.caf; sourceTree = "<group>"; };
 		2470EC0F18DAAAF2004618B4 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		2470EC1018DAAAF2004618B4 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
@@ -99,6 +102,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2402D2C7194954F600BCA105 /* DejalActivityView */ = {
+			isa = PBXGroup;
+			children = (
+				2402D2C4194954F000BCA105 /* DejalActivityView.h */,
+				2402D2C5194954F000BCA105 /* DejalActivityView.m */,
+			);
+			name = DejalActivityView;
+			sourceTree = "<group>";
+		};
 		2481678618D937F100222A3B = {
 			isa = PBXGroup;
 			children = (
@@ -135,6 +147,7 @@
 			children = (
 				24492E4A19401E590082F834 /* alarm.caf */,
 				24D47C67193D52480002D6F9 /* AKSystemSound */,
+				2402D2C7194954F600BCA105 /* DejalActivityView */,
 				248167A118D937F100222A3B /* AppDelegate.h */,
 				248167A218D937F100222A3B /* AppDelegate.m */,
 				24D47C68193D5D6A0002D6F9 /* PlaySound.h */,
@@ -293,6 +306,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2402D2C6194954F000BCA105 /* DejalActivityView.m in Sources */,
 				248167C918D93A8900222A3B /* TimerViewController.m in Sources */,
 				2470EC1518DB7D3E004618B4 /* PrepViewController.m in Sources */,
 				248167A918D937F100222A3B /* ViewController.m in Sources */,

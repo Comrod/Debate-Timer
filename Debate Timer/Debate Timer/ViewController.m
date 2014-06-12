@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "TimerViewController.h"
 #import "PrepViewController.h"
+#import "DejalActivityView.h"
 
 @interface ViewController ()
 
@@ -36,6 +37,7 @@
     {
         if ([storeData integerForKey:@"homeSkip"] == 1)
         {
+            [DejalBezelActivityView activityViewForView:self.view];
             [self performSelector:@selector(skipHome) withObject:self afterDelay:1.0F];
         }
     }
@@ -62,6 +64,7 @@
     [storeData setInteger:self.prepTime forKey:@"prepValue"];
     
     NSLog(@"Setup finished");
+    [DejalBezelActivityView removeViewAnimated:YES];
     
     [self performSegueWithIdentifier:@"segueToTimer" sender:self];
 }
