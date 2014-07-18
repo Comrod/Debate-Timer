@@ -228,7 +228,12 @@ int styleChosen = 0;
     else if (isYourPrepPaused)
     {
         [self resumeYourTimer];
-        [self pauseTheirTimer];
+        
+        if (isTheirPrepStarted)
+        {
+            [self pauseTheirTimer];
+        }
+        
     }
 }
 //Pauses your timer
@@ -349,7 +354,12 @@ int styleChosen = 0;
     else if (isTheirPrepPaused)
     {
         [self resumeTheirTimer];
-        [self pauseYourTimer];
+        
+        if (isYourPrepStarted)
+        {
+           [self pauseYourTimer];
+        }
+        
     }
 }
 //Pauses their timer
