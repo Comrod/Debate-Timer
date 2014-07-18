@@ -11,6 +11,15 @@
 		24492E4B19401E5F0082F834 /* alarm.caf in Resources */ = {isa = PBXBuildFile; fileRef = 24492E4A19401E590082F834 /* alarm.caf */; };
 		2470EC1118DAAAF2004618B4 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2470EC1018DAAAF2004618B4 /* SettingsViewController.m */; };
 		2470EC1518DB7D3E004618B4 /* PrepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2470EC1418DB7D3E004618B4 /* PrepViewController.m */; };
+		247EE1001979C73C00BC7048 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 247EE0D81979C73C00BC7048 /* .gitignore */; };
+		247EE1011979C73C00BC7048 /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 247EE0DA1979C73C00BC7048 /* Appirater.m */; };
+		247EE1021979C73C00BC7048 /* Appirater.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 247EE0DB1979C73C00BC7048 /* Appirater.podspec */; };
+		247EE1031979C73C00BC7048 /* AppiraterLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 247EE0DD1979C73C00BC7048 /* AppiraterLocalizable.strings */; };
+		247EE1041979C73C00BC7048 /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = 247EE0E01979C73C00BC7048 /* CHANGELOG.md */; };
+		247EE1051979C73C00BC7048 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 247EE0F51979C73C00BC7048 /* README.md */; };
+		247EE1071979C77300BC7048 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 247EE1061979C77300BC7048 /* CFNetwork.framework */; };
+		247EE1091979C77F00BC7048 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 247EE1081979C77F00BC7048 /* SystemConfiguration.framework */; };
+		247EE10B1979C78900BC7048 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 247EE10A1979C78900BC7048 /* StoreKit.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		2481679318D937F100222A3B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2481679218D937F100222A3B /* Foundation.framework */; };
 		2481679518D937F100222A3B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2481679418D937F100222A3B /* CoreGraphics.framework */; };
 		2481679718D937F100222A3B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2481679618D937F100222A3B /* UIKit.framework */; };
@@ -49,6 +58,48 @@
 		2470EC1018DAAAF2004618B4 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		2470EC1318DB7D3E004618B4 /* PrepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrepViewController.h; sourceTree = "<group>"; };
 		2470EC1418DB7D3E004618B4 /* PrepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrepViewController.m; sourceTree = "<group>"; };
+		247EE0D81979C73C00BC7048 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		247EE0D91979C73C00BC7048 /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appirater.h; sourceTree = "<group>"; };
+		247EE0DA1979C73C00BC7048 /* Appirater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Appirater.m; sourceTree = "<group>"; };
+		247EE0DB1979C73C00BC7048 /* Appirater.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Appirater.podspec; sourceTree = "<group>"; };
+		247EE0DC1979C73C00BC7048 /* AppiraterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppiraterDelegate.h; sourceTree = "<group>"; };
+		247EE0DE1979C73C00BC7048 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		247EE0DF1979C73C00BC7048 /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		247EE0E01979C73C00BC7048 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG.md; sourceTree = "<group>"; };
+		247EE0E11979C73C00BC7048 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		247EE0E21979C73C00BC7048 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		247EE0E31979C73C00BC7048 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		247EE0E41979C73C00BC7048 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		247EE0E51979C73C00BC7048 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		247EE0E61979C73C00BC7048 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		247EE0E71979C73C00BC7048 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		247EE0E81979C73C00BC7048 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		247EE0E91979C73C00BC7048 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		247EE0EA1979C73C00BC7048 /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		247EE0EB1979C73C00BC7048 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		247EE0EC1979C73C00BC7048 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		247EE0ED1979C73C00BC7048 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		247EE0EE1979C73C00BC7048 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		247EE0EF1979C73C00BC7048 /* ms */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ms; path = ms.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		247EE0F01979C73C00BC7048 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		247EE0F11979C73C00BC7048 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		247EE0F21979C73C00BC7048 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		247EE0F31979C73C00BC7048 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/AppiraterLocalizable.strings"; sourceTree = "<group>"; };
+		247EE0F41979C73C00BC7048 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		247EE0F51979C73C00BC7048 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		247EE0F61979C73C00BC7048 /* ro */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ro; path = ro.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		247EE0F71979C73C00BC7048 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		247EE0F81979C73C00BC7048 /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		247EE0F91979C73C00BC7048 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		247EE0FA1979C73C00BC7048 /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		247EE0FB1979C73C00BC7048 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		247EE0FC1979C73C00BC7048 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		247EE0FD1979C73C00BC7048 /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
+		247EE0FE1979C73C00BC7048 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/AppiraterLocalizable.strings"; sourceTree = "<group>"; };
+		247EE0FF1979C73C00BC7048 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/AppiraterLocalizable.strings"; sourceTree = "<group>"; };
+		247EE1061979C77300BC7048 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		247EE1081979C77F00BC7048 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		247EE10A1979C78900BC7048 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		2481678F18D937F100222A3B /* Debate Timer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Debate Timer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2481679218D937F100222A3B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2481679418D937F100222A3B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -82,6 +133,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				247EE10B1979C78900BC7048 /* StoreKit.framework in Frameworks */,
+				247EE1091979C77F00BC7048 /* SystemConfiguration.framework in Frameworks */,
+				247EE1071979C77300BC7048 /* CFNetwork.framework in Frameworks */,
 				24A78EB018DF40C200A885D0 /* AudioToolbox.framework in Frameworks */,
 				2481679518D937F100222A3B /* CoreGraphics.framework in Frameworks */,
 				2481679718D937F100222A3B /* UIKit.framework in Frameworks */,
@@ -111,6 +165,21 @@
 			name = DejalActivityView;
 			sourceTree = "<group>";
 		};
+		247EE0D71979C73C00BC7048 /* appirater-master */ = {
+			isa = PBXGroup;
+			children = (
+				247EE0D81979C73C00BC7048 /* .gitignore */,
+				247EE0D91979C73C00BC7048 /* Appirater.h */,
+				247EE0DA1979C73C00BC7048 /* Appirater.m */,
+				247EE0DB1979C73C00BC7048 /* Appirater.podspec */,
+				247EE0DC1979C73C00BC7048 /* AppiraterDelegate.h */,
+				247EE0DD1979C73C00BC7048 /* AppiraterLocalizable.strings */,
+				247EE0E01979C73C00BC7048 /* CHANGELOG.md */,
+				247EE0F51979C73C00BC7048 /* README.md */,
+			);
+			path = "appirater-master";
+			sourceTree = "<group>";
+		};
 		2481678618D937F100222A3B = {
 			isa = PBXGroup;
 			children = (
@@ -133,6 +202,9 @@
 		2481679118D937F100222A3B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				247EE10A1979C78900BC7048 /* StoreKit.framework */,
+				247EE1081979C77F00BC7048 /* SystemConfiguration.framework */,
+				247EE1061979C77300BC7048 /* CFNetwork.framework */,
 				24A78EAF18DF40C200A885D0 /* AudioToolbox.framework */,
 				2481679218D937F100222A3B /* Foundation.framework */,
 				2481679418D937F100222A3B /* CoreGraphics.framework */,
@@ -147,6 +219,7 @@
 			children = (
 				24492E4A19401E590082F834 /* alarm.caf */,
 				24D47C67193D52480002D6F9 /* AKSystemSound */,
+				247EE0D71979C73C00BC7048 /* appirater-master */,
 				2402D2C7194954F600BCA105 /* DejalActivityView */,
 				248167A118D937F100222A3B /* AppDelegate.h */,
 				248167A218D937F100222A3B /* AppDelegate.m */,
@@ -267,6 +340,37 @@
 			knownRegions = (
 				en,
 				Base,
+				ar,
+				ca,
+				cs,
+				da,
+				de,
+				el,
+				es,
+				fi,
+				fr,
+				he,
+				hu,
+				id,
+				it,
+				ja,
+				ko,
+				ms,
+				nb,
+				nl,
+				pl,
+				"pt-BR",
+				pt,
+				ro,
+				ru,
+				sk,
+				sv,
+				th,
+				tr,
+				uk,
+				vi,
+				"zh-Hans",
+				"zh-Hant",
 			);
 			mainGroup = 2481678618D937F100222A3B;
 			productRefGroup = 2481679018D937F100222A3B /* Products */;
@@ -284,8 +388,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				247EE1031979C73C00BC7048 /* AppiraterLocalizable.strings in Resources */,
+				247EE1001979C73C00BC7048 /* .gitignore in Resources */,
 				24492E4B19401E5F0082F834 /* alarm.caf in Resources */,
+				247EE1041979C73C00BC7048 /* CHANGELOG.md in Resources */,
 				248167AB18D937F100222A3B /* Images.xcassets in Resources */,
+				247EE1021979C73C00BC7048 /* Appirater.podspec in Resources */,
+				247EE1051979C73C00BC7048 /* README.md in Resources */,
 				2481679D18D937F100222A3B /* InfoPlist.strings in Resources */,
 				248167A618D937F100222A3B /* Main.storyboard in Resources */,
 			);
@@ -312,6 +421,7 @@
 				248167A918D937F100222A3B /* ViewController.m in Sources */,
 				2470EC1118DAAAF2004618B4 /* SettingsViewController.m in Sources */,
 				248167A318D937F100222A3B /* AppDelegate.m in Sources */,
+				247EE1011979C73C00BC7048 /* Appirater.m in Sources */,
 				24D47C6A193D5D6A0002D6F9 /* PlaySound.m in Sources */,
 				24D47C66193D52440002D6F9 /* AKSystemSound.m in Sources */,
 				2481679F18D937F100222A3B /* main.m in Sources */,
@@ -337,6 +447,45 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		247EE0DD1979C73C00BC7048 /* AppiraterLocalizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				247EE0DE1979C73C00BC7048 /* ar */,
+				247EE0DF1979C73C00BC7048 /* ca */,
+				247EE0E11979C73C00BC7048 /* cs */,
+				247EE0E21979C73C00BC7048 /* da */,
+				247EE0E31979C73C00BC7048 /* de */,
+				247EE0E41979C73C00BC7048 /* el */,
+				247EE0E51979C73C00BC7048 /* en */,
+				247EE0E61979C73C00BC7048 /* es */,
+				247EE0E71979C73C00BC7048 /* fi */,
+				247EE0E81979C73C00BC7048 /* fr */,
+				247EE0E91979C73C00BC7048 /* he */,
+				247EE0EA1979C73C00BC7048 /* hu */,
+				247EE0EB1979C73C00BC7048 /* id */,
+				247EE0EC1979C73C00BC7048 /* it */,
+				247EE0ED1979C73C00BC7048 /* ja */,
+				247EE0EE1979C73C00BC7048 /* ko */,
+				247EE0EF1979C73C00BC7048 /* ms */,
+				247EE0F01979C73C00BC7048 /* nb */,
+				247EE0F11979C73C00BC7048 /* nl */,
+				247EE0F21979C73C00BC7048 /* pl */,
+				247EE0F31979C73C00BC7048 /* pt-BR */,
+				247EE0F41979C73C00BC7048 /* pt */,
+				247EE0F61979C73C00BC7048 /* ro */,
+				247EE0F71979C73C00BC7048 /* ru */,
+				247EE0F81979C73C00BC7048 /* sk */,
+				247EE0F91979C73C00BC7048 /* sv */,
+				247EE0FA1979C73C00BC7048 /* th */,
+				247EE0FB1979C73C00BC7048 /* tr */,
+				247EE0FC1979C73C00BC7048 /* uk */,
+				247EE0FD1979C73C00BC7048 /* vi */,
+				247EE0FE1979C73C00BC7048 /* zh-Hans */,
+				247EE0FF1979C73C00BC7048 /* zh-Hant */,
+			);
+			name = AppiraterLocalizable.strings;
+			sourceTree = "<group>";
+		};
 		2481679B18D937F100222A3B /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -444,7 +593,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Debate Timer/Debate Timer-Prefix.pch";
 				INFOPLIST_FILE = "Debate Timer/Debate Timer-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -462,7 +611,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Debate Timer/Debate Timer-Prefix.pch";
 				INFOPLIST_FILE = "Debate Timer/Debate Timer-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;

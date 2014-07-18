@@ -7,16 +7,27 @@
 //
 
 #import "AppDelegate.h"
+#import "Appirater.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    
+    //Skip settings
     self.storeData = [NSUserDefaults standardUserDefaults];
     [self.storeData setBool:YES forKey:@"firstLaunch"];
     NSLog(@"First Launch bool: %d", [self.storeData boolForKey:@"firstLaunch"]);
     
+    //Appirater
+    [Appirater setAppId:@"886220744"];    // Change for your "Your APP ID"
+    [Appirater setDaysUntilPrompt:2];     // Days from first entered the app until prompt
+    [Appirater setUsesUntilPrompt:5];     // Number of uses until prompt
+    [Appirater setTimeBeforeReminding:2]; // Days until reminding if the user taps "remind me"
+    [Appirater setDebug:NO];           // If you set this to YES it will display all the time
+    
+    [Appirater appLaunched:YES];
     return YES;
 }
 							
