@@ -248,6 +248,9 @@ BOOL pickerIsShowing = NO;
     self.speechTimer = [NSTimer scheduledTimerWithTimeInterval:0.01f target:self selector:@selector(updateLabel:) userInfo:nil repeats:YES];
     timerStarted = YES;
     timerFinished = NO;
+    
+    //Prevent screen from falling into idle
+    [UIApplication sharedApplication].idleTimerDisabled = YES;
 }
 //Effectively the timer
 - (void)updateLabel:(NSTimer *)timer
@@ -367,6 +370,9 @@ BOOL pickerIsShowing = NO;
     {
         [self.speechTimer invalidate];
     }
+    
+    //Prevent screen from falling into idle
+    [UIApplication sharedApplication].idleTimerDisabled = NO;
 }
 - (void)roundOver
 {

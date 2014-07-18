@@ -155,6 +155,9 @@ int styleChosen = 0;
 - (void)runYourTimer
 {
     self.yourPrepTimer = [NSTimer scheduledTimerWithTimeInterval:0.01f target:self selector:@selector(updateYourLabel:) userInfo:nil repeats:YES];
+    
+    //Prevent screen from falling into idle
+    [UIApplication sharedApplication].idleTimerDisabled = YES;
 }
 - (void)updateYourLabel:(NSTimer *)timer
 {
@@ -243,6 +246,9 @@ int styleChosen = 0;
     [yourPrepButton setTitle:@"Resume" forState:UIControlStateNormal];
     isYourPrepPaused = YES;
     NSLog(@"Pauses your timer");
+    
+    //Prevent screen from falling into idle
+    [UIApplication sharedApplication].idleTimerDisabled = NO;
 }
 //Resumes your timer
 - (void)resumeYourTimer
@@ -251,6 +257,9 @@ int styleChosen = 0;
     [yourPrepButton setTitle:@"Pause" forState:UIControlStateNormal];
     isYourPrepPaused = NO;
     NSLog(@"Resumes your timer");
+    
+    //Prevent screen from falling into idle
+    [UIApplication sharedApplication].idleTimerDisabled = YES;
 }
 - (void)resetYourPrep
 {
@@ -268,6 +277,9 @@ int styleChosen = 0;
     isYourPrepPaused = NO;
     [self setYourLabel];
     [yourPrepButton setTitle:@"Start" forState:UIControlStateNormal];
+    
+    //Prevent screen from falling into idle
+    [UIApplication sharedApplication].idleTimerDisabled = NO;
 }
 - (IBAction)resetYourPrepTap:(id)sender
 {
@@ -281,6 +293,9 @@ int styleChosen = 0;
 - (void)runTheirTimer
 {
     self.theirPrepTimer = [NSTimer scheduledTimerWithTimeInterval:0.01f target:self selector:@selector(updateTheirLabel:) userInfo:nil repeats:YES];
+    
+    //Prevent screen from falling into idle
+    [UIApplication sharedApplication].idleTimerDisabled = YES;
 }
 - (void)updateTheirLabel:(NSTimer *)timer
 {
@@ -369,6 +384,9 @@ int styleChosen = 0;
     [theirPrepButton setTitle:@"Resume" forState:UIControlStateNormal];
     isTheirPrepPaused = YES;
     NSLog(@"Pauses their timer");
+    
+    //Prevent screen from falling into idle
+    [UIApplication sharedApplication].idleTimerDisabled = NO;
 }
 //Resumes their timer
 - (void)resumeTheirTimer
@@ -377,6 +395,9 @@ int styleChosen = 0;
     [theirPrepButton setTitle:@"Pause" forState:UIControlStateNormal];
     isTheirPrepPaused = NO;
     NSLog(@"Resumes their timer");
+    
+    //Prevent screen from falling into idle
+    [UIApplication sharedApplication].idleTimerDisabled = YES;
 }
 - (void)resetTheirPrep
 {
@@ -394,6 +415,9 @@ int styleChosen = 0;
     isTheirPrepPaused = NO;
     [self setTheirLabel];
     [theirPrepButton setTitle:@"Start" forState:UIControlStateNormal];
+    
+    //Prevent screen from falling into idle
+    [UIApplication sharedApplication].idleTimerDisabled = NO;
 }
 - (IBAction)resetTheirPrepTap:(id)sender
 {
